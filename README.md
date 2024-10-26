@@ -1,1 +1,1 @@
-# flower-store
+# Flower store app
