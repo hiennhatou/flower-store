@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.subactivity.SubActivity">
-    <TextView
-        android:id="@+id/button_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Sub Activity"/>
-    <fragment
-        android:id="@+id/first_fragment"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="edu.ou.flowerstore.ui.subactivity.FirstFragment"
-        tools:layout="@layout/sub_activity_first_fragment"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="okkkkk"
+            android:textColor="#BD1A1A"
+            android:textSize="24sp" />
+    </LinearLayout>
 </LinearLayout>
