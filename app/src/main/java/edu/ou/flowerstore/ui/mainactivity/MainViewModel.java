@@ -9,7 +9,7 @@ import androidx.databinding.library.baseAdapters.BR;
 import edu.ou.flowerstore.ui.Navigation;
 
 public class MainViewModel extends BaseObservable {
-    private int core = 0;
+    private int core = 1;
 
     @Bindable
     public String getCore() {
