@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FlowerStore" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#AB886D</item>
 
-    <style name="Theme.FlowerStore" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOutline">?attr/colorPrimary</item>
+        <item name="colorSecondaryContainer">#EFE2D8</item>
+        <item name="colorSurfaceContainerLow">#FFE8D6</item>
+        <item name="colorOnSecondaryContainer">?attr/colorPrimary</item>
+        <item name="colorSurface">?attr/colorSecondaryContainer</item>
+        <item name="colorOnSurface">#84532E</item>
+        <item name="colorOnSurfaceVariant">?attr/colorOnSurface</item>
+        <item name="colorSurfaceContainer">#FFFBF8</item>
 
+        <item name="android:windowBackground">@color/white</item>
     </style>
-    <style name="ShapeAppearanceOverly.MyApp" parent="ShapeAppearance.Material3.SmallComponent">
-        <item name="cornerSize">20sp</item>
-        <item name="cornerFamilyTopLeft">rounded</item>
-        <item name="cornerFamilyTopRight">rounded</item>
-    </style>
+
+    <style name="Theme.FlowerStore" parent="Base.Theme.FlowerStore" />
 </resources>
