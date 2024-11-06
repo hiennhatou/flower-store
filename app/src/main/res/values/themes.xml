@@ -17,4 +17,12 @@
     </style>
 
     <style name="Theme.FlowerStore" parent="Base.Theme.FlowerStore" />
+
+    <style name="ShapeAppearance.FlowerStore.ProductDetail" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30sp</item>
+        <item name="cornerSizeBottomRight">0sp</item>
+        <item name="cornerSizeBottomLeft">0sp</item>
+    </style>
+
 </resources>
