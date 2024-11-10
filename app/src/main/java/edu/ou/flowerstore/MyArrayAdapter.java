@@ -46,9 +46,9 @@ public class MyArrayAdapter extends ArrayAdapter<Item> {
         TextView txt_tensp = convertView.findViewById(R.id.txt_tensp);
         txt_tensp.setText((myitem.getName()));
         TextView txt_giasp = convertView.findViewById(R.id.txt_giasp);
-        txt_giasp.setText(myitem.getPrice());
+        txt_giasp.setText(String.valueOf(myitem.getPrice()));
         TextView txt_danhgia =convertView.findViewById(R.id.txt_danhgia);
-        txt_danhgia.setText(myitem.getRate());
+        txt_danhgia.setText(String.valueOf(myitem.getRate()));
         return convertView;
     }
 }
