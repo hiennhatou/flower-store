@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.FlowerStore"
-    tools:context=".ProductDetail">
+    tools:context=".ui.productdetail.ProductDetailActivity">
 
     <ImageView
         android:layout_width="match_parent"

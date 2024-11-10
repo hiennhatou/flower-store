@@ -1,4 +1,4 @@
-package edu.ou.flowerstore;
+package edu.ou.flowerstore.ui.productdetail;
 
 import android.os.Bundle;
 
@@ -8,7 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class ProductDetail extends AppCompatActivity {
+import edu.ou.flowerstore.R;
+
+public class ProductDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
