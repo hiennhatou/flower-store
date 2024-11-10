@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-</selector>
+<gradient xmlns:android="http://schemas.android.com/apk/res/android"
+    android:startColor="#AB886D"
+    android:endColor="#8C5E41"
+    android:angle="90" />

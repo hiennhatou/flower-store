@@ -1,4 +1,8 @@
 package edu.ou.flowerstore
 
-class CartItem {
-}
+data class CartItem(
+    val name: String,
+    val price: Double,
+    var quantity: Int
+)
+
