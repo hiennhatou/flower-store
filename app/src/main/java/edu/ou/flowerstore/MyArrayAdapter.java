@@ -5,50 +5,56 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyArrayAdapter extends ArrayAdapter<Item> {
-    Activity context;
-    int IdLayout;
-    ArrayList<Item> myList;
+public class MyArrayAdapter extends RecyclerView.Adapter<MyArrayAdapter.ViewHolder> {
+    private Context context;
+    private int layoutId;
+    private ArrayList<Item> itemList;
 
-    public MyArrayAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
-    }
-
-    // Tao constructor
-    public MyArrayAdapter(Activity context, int idLayout, ArrayList<Item> myList) {
-        super(context, idLayout, myList);
+    public MyArrayAdapter(Context context, int layoutId, ArrayList<Item> itemList) {
         this.context = context;
-        IdLayout = idLayout;
-        this.myList = myList;
+        this.layoutId = layoutId;
+        this.itemList = itemList;
     }
-    // Goi ham getView de Adapter lay va hien thi du lieu
+
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        //Tao de chua Layout
-        LayoutInflater myflactor = context.getLayoutInflater();
-        // Dat IdLayout len de de tao View
-        convertView = myflactor.inflate(IdLayout, null);
-        //Lay 1 phan tu trong mang du lieu
-        Item myitem = myList.get(position);
-        //Khai bao, anh xa id va hien thi anh, ten, gia, rate cua san pham
-        ImageView img_item = convertView.findViewById(R.id.img_item);
-        img_item.setImageResource(myitem.getImage());
-        TextView txt_tensp = convertView.findViewById(R.id.txt_tensp);
-        txt_tensp.setText((myitem.getName()));
-        TextView txt_giasp = convertView.findViewById(R.id.txt_giasp);
-        txt_giasp.setText(String.valueOf(myitem.getPrice()));
-        TextView txt_danhgia =convertView.findViewById(R.id.txt_danhgia);
-        txt_danhgia.setText(String.valueOf(myitem.getRate()));
-        return convertView;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Item item = itemList.get(position);
+        holder.imgItem.setImageResource(item.getImage());
+        holder.txtName.setText(item.getName());
+        holder.txtPrice.setText(String.format("%,d VNĐ", item.getPrice()));
+        holder.txtRating.setText(String.valueOf(item.getRate()));
+    }
+
+    @Override
+    public int getItemCount() {
+        return itemList.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imgItem;
+        TextView txtName, txtPrice, txtRating;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imgItem = itemView.findViewById(R.id.img_item);
+            txtName = itemView.findViewById(R.id.txt_tensp);
+            txtPrice = itemView.findViewById(R.id.txt_giasp);
+            txtRating = itemView.findViewById(R.id.txt_danhgia);
+        }
     }
 }

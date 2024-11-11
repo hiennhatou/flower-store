@@ -10,9 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -58,28 +56,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="13dp"
             android:layout_marginEnd="16dp"
             android:alpha="0.5"
             app:dividerColor="@color/black" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/flower_listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
-
-            <GridView
-                android:id="@+id/gv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="2"
-                android:verticalSpacing="10dp"
-                android:horizontalSpacing="10dp"
-                android:stretchMode="columnWidth"
-                android:gravity="center"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:padding="16dp" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

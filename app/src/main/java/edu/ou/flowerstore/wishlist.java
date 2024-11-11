@@ -1,44 +1,38 @@
 package edu.ou.flowerstore;
 
 import android.os.Bundle;
-import android.widget.GridView;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class wishlist extends AppCompatActivity {
-    int image[]= {R.drawable.ic_home, R.drawable.back, R.drawable.camtucau, R.drawable.ic_cart,
-            R.drawable.star,R.drawable.ic_categories, R.drawable.ic_profile, R.drawable.search};
-    String name[] = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    int price[] = {30000, 10000, 11111, 22222,333333,444444,555555,6666666};
+    int[] images = {R.drawable.camtucau, R.drawable.camtucau, R.drawable.camtucau, R.drawable.camtucau,
+            R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background};
+    String[] names = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    int[] prices = {30000, 10000, 11111, 22222, 333333, 444444, 555555, 6666666};
+    int[] ratings = {1, 2, 3, 4, 5, 4, 1, 3};
 
-    GridView gv;
-    ArrayList<Item> mylist;
-    MyArrayAdapter myadapter;
+    RecyclerView recyclerView;
+    ArrayList<Item> itemList;
+    MyArrayAdapter myAdapter;
 
-    int start[] = {1,2,3,4,5,4,1,3};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_wishlist);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        mylist = new ArrayList<>();
-        for(int i=0;i<name.length;i++){
-            mylist.add(new Item(image[i], name[i], price[i], start[i]));
+        // Khởi tạo dữ liệu
+        itemList = new ArrayList<>();
+        for (int i = 0; i < names.length; i++) {
+            itemList.add(new Item(images[i], names[i], prices[i], ratings[i]));
         }
-        myadapter = new MyArrayAdapter(wishlist.this, R.layout.viewholder_list_food, mylist);
-        gv = findViewById(R.id.gv);
-        gv.setAdapter(myadapter);
+
+        // Thiết lập RecyclerView với GridLayoutManager (2 cột)
+        recyclerView = findViewById(R.id.flower_listView);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        myAdapter = new MyArrayAdapter(this, R.layout.viewholder_list_food, itemList);
+        recyclerView.setAdapter(myAdapter);
     }
 }
