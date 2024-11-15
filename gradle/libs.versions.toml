@@ -13,6 +13,7 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 materialVersion = "1.9.0"
 roomCompiler = "2.6.1"
+kotlin = "1.9.0"
 
 [libraries]
 annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
@@ -37,4 +38,5 @@ room-testing = { module = "androidx.room:room-testing", version.ref = "roomCompi
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

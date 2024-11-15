@@ -5,6 +5,7 @@
     <color name="red">#FF0000</color>
     <color name="brown">#AB886D</color>
     <color name="grey">#AEADAD</color>
+    <color name="primaryColor">#AB886D</color>
 
 
 </resources>
