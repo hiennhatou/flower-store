@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginTop="0dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/orderImage"
+            android:layout_width="wrap_content"
+            android:layout_height="119dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/orderName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Hoa hồng có gai"
+                android:textStyle="bold"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/orderQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="Số lượng : " />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/orderPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price : "
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="16dp" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/brown"
+                        android:padding="12dp"
+                        android:text="Theo dõi đơn"
+                        android:textSize="16sp"
+                        tools:layout_editor_absoluteX="143dp"
+                        tools:layout_editor_absoluteY="0dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
