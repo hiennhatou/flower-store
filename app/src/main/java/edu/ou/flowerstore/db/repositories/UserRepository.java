@@ -13,15 +13,16 @@ import edu.ou.flowerstore.db.entities.UserEntity;
 
 public class UserRepository {
     private final UserDAO userDAO;
-    private final LiveData<List<UserEntity>> users;
+    private LiveData<List<UserEntity>> users;
 
     public UserRepository(Application application) {
         RoomDB db = RoomDB.getDatabase(application);
         userDAO = db.getUserDAO();
-        users = userDAO.getAll();
     }
 
     public LiveData<List<UserEntity>> getAllUsers() {
+        if (users == null)
+            users = userDAO.getAll();
         return users;
     }
 

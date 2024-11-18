@@ -1,4 +1,4 @@
-package edu.ou.flowerstore.utils.fragment;
+package edu.ou.flowerstore.ui.main;
 
 import android.os.Bundle;
 
@@ -8,16 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import edu.ou.flowerstore.databinding.FragmentBottomNavigationBinding;
+import edu.ou.flowerstore.R;
 
-public class BottomNavigation extends Fragment {
-    private FragmentBottomNavigationBinding binding;
-
-    public BottomNavigation() {
+public class WishlistFragment extends Fragment {
+    public WishlistFragment() {
     }
 
-    public static BottomNavigation newInstance() {
-        BottomNavigation fragment = new BottomNavigation();
+    public static WishlistFragment newInstance(String param1, String param2) {
+        WishlistFragment fragment = new WishlistFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -31,7 +29,6 @@ public class BottomNavigation extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentBottomNavigationBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        return inflater.inflate(R.layout.main_fragment_wishlist, container, false);
     }
 }

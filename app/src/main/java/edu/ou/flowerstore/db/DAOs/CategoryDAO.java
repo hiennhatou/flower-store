@@ -20,4 +20,7 @@ public interface CategoryDAO {
 
     @Delete
     void delete(CategoryEntity category);
+
+    @Query("SELECT * FROM categories where :id")
+    CategoryEntity getCategoriesById(int id);
 }

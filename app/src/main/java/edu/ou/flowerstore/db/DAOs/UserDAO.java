@@ -21,4 +21,7 @@ public interface UserDAO {
 
     @Delete
     void delete(UserEntity user);
+
+    @Query("SELECT * FROM users WHERE id=:id")
+    UserEntity findUserById(int id);
 }

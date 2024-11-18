@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.FlowerStore"
+    tools:context=".ui.main.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="10sp"
+        android:paddingVertical="10sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0sp"
+            android:padding="0sp">
+
+            <Button
+                android:id="@+id/search_btn"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="0sp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="0sp"
+                android:gravity="start|center_vertical"
+                android:paddingVertical="0sp"
+                android:text="Tìm kiếm"
+                app:icon="@drawable/search"
+                app:layout_constraintEnd_toStartOf="@id/notify_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                style="@style/Button.IconOnly.Outlined"
+                android:id="@+id/notify_btn"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerInside"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                app:strokeWidth="0sp"
+                app:icon="@drawable/bell"
+                app:iconSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@id/search_btn"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/search_btn"
+                app:tint="?attr/colorPrimary" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="80sp"
+            android:layout_marginVertical="10sp"
+            android:src="@drawable/name_logo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/see_more_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15sp">
+
+            <LinearLayout
+                android:id="@+id/category_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Danh mục"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Xem Thêm"
+                    android:textColor="?attr/colorPrimary"/>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/weeding_section"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/birthday_section"
+                app:layout_constraintTop_toBottomOf="@id/category_header">
+
+                <Button
+                    android:id="@+id/wedding_btn"
+                    style="@style/Button.IconOnly.Elevated"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    app:icon="@drawable/ring"
+                    app:iconSize="40sp"
+                    android:elevation="1sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoa cưới"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/wedding_btn" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/birthday_section"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintLeft_toRightOf="@id/weeding_section"
+                app:layout_constraintRight_toLeftOf="@id/congratulate_section"
+                app:layout_constraintTop_toBottomOf="@id/category_header">
+
+                <Button
+                    android:id="@+id/birthday_btn"
+                    style="@style/Button.IconOnly.Elevated"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    android:layout_weight="1"
+                    android:elevation="1sp"
+                    app:icon="@drawable/birthday"
+                    app:iconSize="40sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoa kỷ niệm"
+                    android:textAlignment="center"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/birthday_btn" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/congratulate_section"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingHorizontal="2sp"
+                app:layout_constraintLeft_toRightOf="@id/birthday_section"
+                app:layout_constraintRight_toLeftOf="@id/office_section"
+                app:layout_constraintTop_toBottomOf="@id/category_header">
+
+                <Button
+                    android:id="@+id/congratulate_btn"
+                    style="@style/Button.IconOnly.Elevated"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    android:layout_weight="1"
+                    android:elevation="1sp"
+                    app:icon="@drawable/achieve"
+                    app:iconSize="40sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hoa chúc mừng"
+                    android:textAlignment="center"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/congratulate_btn" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/office_section"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintLeft_toRightOf="@id/congratulate_section"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/category_header">
+
+                <Button
+                    android:id="@+id/office_btn"
+                    style="@style/Button.IconOnly.Elevated"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:elevation="1sp"
+                    app:icon="@drawable/office"
+                    app:iconSize="40sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoa nội thất"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/office_btn" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sản phẩm bán chạy"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="20sp"
+            android:textSize="20sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="10"
+            tools:listitem="@layout/main_product_card_item" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

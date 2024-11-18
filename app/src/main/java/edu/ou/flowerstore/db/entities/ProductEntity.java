@@ -42,7 +42,7 @@ public class ProductEntity extends BaseEntity {
     public StatusEnum status;
 
     @ColumnInfo()
-    public String thumbnail;
+    public int thumbnail;
 
     @ColumnInfo(name = "category_id")
     public long categoryId;
