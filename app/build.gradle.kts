@@ -45,6 +45,7 @@ googleServices {
 }
 
 dependencies {
+    implementation(files("../zpdk-release-v3.1.aar"))
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.testing)

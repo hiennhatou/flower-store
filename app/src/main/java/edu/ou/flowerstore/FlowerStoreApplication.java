@@ -19,7 +19,7 @@ public class FlowerStoreApplication extends Application {
         return instance;
     }
 
-    public LiveData<Integer> getCartAmount () {
+    public LiveData<Integer> getCartAmount() {
         return cartAmount;
     }
 
