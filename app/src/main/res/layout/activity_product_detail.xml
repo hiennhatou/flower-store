@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.productdetail.ProductDetailActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="450sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/boutique" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="430sp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="30sp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="20sp"
+                app:shapeAppearance="@style/ShapeAppearance.FlowerStore.ProductDetail"
+                app:strokeWidth="0sp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="20sp">
+
+                    <!-- Nội dung chi tiết đơn hàng-->
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="43sp"
+        android:layout_height="43sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:insetLeft="0sp"
+        android:insetTop="0sp"
+        android:insetRight="0sp"
+        android:insetBottom="0sp"
+        app:backgroundTint="@color/white"
+        app:elevation="20sp"
+        app:icon="@drawable/arrow_left"
+        app:iconGravity="textStart"
+        app:iconPadding="3sp"
+        app:iconSize="35sp"
+        app:iconTint="@color/black"
+        app:strokeColor="@color/black"
+        app:strokeWidth="0.1sp" />
+
+    <Button
+        android:layout_width="43sp"
+        android:layout_height="43sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:insetLeft="0sp"
+        android:insetTop="0sp"
+        android:insetRight="0sp"
+        android:insetBottom="0sp"
+        app:backgroundTint="@color/white"
+        app:elevation="20sp"
+        app:icon="@drawable/heart"
+        app:iconGravity="textStart"
+        app:iconPadding="0sp"
+        app:iconSize="30sp"
+        app:iconTint="@color/black"
+        app:strokeColor="@color/black"
+        app:strokeWidth="0.1sp" />
+</FrameLayout>
