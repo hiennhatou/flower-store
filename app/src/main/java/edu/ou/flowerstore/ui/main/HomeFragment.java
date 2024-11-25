@@ -27,54 +27,34 @@ public class HomeFragment extends Fragment {
     MutableLiveData<List<ProductEntity>> products;
 
     public HomeFragment() {
-        ProductEntity product1 = new ProductEntity();
-        product1.price = 120000;
-        product1.name = "Hoa hồng";
+        ProductEntity product1 = new ProductEntity("Hoa hồng", 120000);
         product1.thumbnail = R.drawable.boutique;
 
-        ProductEntity product2 = new ProductEntity();
-        product2.name = "Hoa mai";
-        product2.price = 354000;
+        ProductEntity product2 = new ProductEntity("Hoa hồng", 120000);
         product2.thumbnail = R.drawable.boutique;
 
-        ProductEntity product3 = new ProductEntity();
-        product3.price = 120000;
-        product3.name = "Hoa hồng";
+        ProductEntity product3 = new ProductEntity("Hoa hồng", 120000);
         product3.thumbnail = R.drawable.boutique;
 
-        ProductEntity product4 = new ProductEntity();
-        product4.name = "Hoa mai";
-        product4.price = 354000;
+        ProductEntity product4 = new ProductEntity("Hoa hồng", 120000);
         product4.thumbnail = R.drawable.boutique;
 
-        ProductEntity product5 = new ProductEntity();
-        product5.price = 120000;
-        product5.name = "Hoa hồng";
+        ProductEntity product5 = new ProductEntity("Hoa hồng", 120000);
         product5.thumbnail = R.drawable.boutique;
 
-        ProductEntity product6 = new ProductEntity();
-        product6.name = "Hoa mai";
-        product6.price = 354000;
+        ProductEntity product6 = new ProductEntity("Hoa hồng", 120000);
         product6.thumbnail = R.drawable.boutique;
 
-        ProductEntity product7 = new ProductEntity();
-        product7.price = 120000;
-        product7.name = "Hoa hồng";
+        ProductEntity product7 = new ProductEntity("Hoa hồng", 120000);
         product7.thumbnail = R.drawable.boutique;
 
-        ProductEntity product8 = new ProductEntity();
-        product8.name = "Hoa mai";
-        product8.price = 354000;
+        ProductEntity product8 = new ProductEntity("Hoa hồng", 120000);
         product8.thumbnail = R.drawable.boutique;
 
-        ProductEntity product9 = new ProductEntity();
-        product9.price = 120000;
-        product9.name = "Hoa hồng";
+        ProductEntity product9 = new ProductEntity("Hoa hồng", 120000);
         product9.thumbnail = R.drawable.boutique;
 
-        ProductEntity product10 = new ProductEntity();
-        product10.name = "Hoa mai";
-        product10.price = 354000;
+        ProductEntity product10 = new ProductEntity("Hoa hồng", 120000);
         product10.thumbnail = R.drawable.boutique;
 
         products = new MutableLiveData<>(List.of(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10));
