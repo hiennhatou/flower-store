@@ -13,6 +13,15 @@ public class ProductEntity extends BaseEntity {
         SOLD_OUT
     }
 
+    public ProductEntity () {
+
+    }
+
+    public ProductEntity(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
     static public class StatusConverter {
         @TypeConverter
         public static StatusEnum fromString(String value) {

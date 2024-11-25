@@ -36,6 +36,9 @@
     <style name="RoundedSquare.30Percent">
         <item name="cornerSize">30%</item>
     </style>
+    <style name="RoundedSquare.50Percent">
+        <item name="cornerSize">50%</item>
+    </style>
 
     <style name="RoundedSquare.Input" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerSize">50%</item>
