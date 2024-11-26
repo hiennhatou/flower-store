@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean onSelectHeader(MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
-            binding.pager.setCurrentItem(0);
+            binding.pager.setCurrentItem(0, false);
         } else if (item.getItemId() == R.id.nav_wishlist) {
-            binding.pager.setCurrentItem(1);
+            binding.pager.setCurrentItem(1, false);
         } else if (item.getItemId() == R.id.nav_categories) {
-            binding.pager.setCurrentItem(2);
+            binding.pager.setCurrentItem(2, false);
         } else if (item.getItemId() == R.id.nav_profile) {
-            binding.pager.setCurrentItem(3);
+            binding.pager.setCurrentItem(3, false);
         }
         return true;
     }

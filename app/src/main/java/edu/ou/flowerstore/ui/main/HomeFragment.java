@@ -19,45 +19,26 @@ import java.util.List;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.MainFragmentHomeBinding;
-import edu.ou.flowerstore.db.entities.ProductEntity;
 import edu.ou.flowerstore.ui.cart.CartActivity;
+import edu.ou.flowerstore.utils.adapters.OverviewProductAdapter;
 
 public class HomeFragment extends Fragment {
     MainFragmentHomeBinding binding;
-    MutableLiveData<List<ProductEntity>> products;
+    List<OverviewProductAdapter.OverviewProduct> products;
 
     public HomeFragment() {
-        ProductEntity product1 = new ProductEntity("Hoa hồng", 120000);
-        product1.thumbnail = R.drawable.boutique;
+        OverviewProductAdapter.OverviewProduct product1 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product2 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product3 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product4 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product5 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product6 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product7 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product8 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product9 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product10 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
 
-        ProductEntity product2 = new ProductEntity("Hoa hồng", 120000);
-        product2.thumbnail = R.drawable.boutique;
-
-        ProductEntity product3 = new ProductEntity("Hoa hồng", 120000);
-        product3.thumbnail = R.drawable.boutique;
-
-        ProductEntity product4 = new ProductEntity("Hoa hồng", 120000);
-        product4.thumbnail = R.drawable.boutique;
-
-        ProductEntity product5 = new ProductEntity("Hoa hồng", 120000);
-        product5.thumbnail = R.drawable.boutique;
-
-        ProductEntity product6 = new ProductEntity("Hoa hồng", 120000);
-        product6.thumbnail = R.drawable.boutique;
-
-        ProductEntity product7 = new ProductEntity("Hoa hồng", 120000);
-        product7.thumbnail = R.drawable.boutique;
-
-        ProductEntity product8 = new ProductEntity("Hoa hồng", 120000);
-        product8.thumbnail = R.drawable.boutique;
-
-        ProductEntity product9 = new ProductEntity("Hoa hồng", 120000);
-        product9.thumbnail = R.drawable.boutique;
-
-        ProductEntity product10 = new ProductEntity("Hoa hồng", 120000);
-        product10.thumbnail = R.drawable.boutique;
-
-        products = new MutableLiveData<>(List.of(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10));
+        products = List.of(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10);
     }
 
     public static HomeFragment newInstance() {
@@ -112,7 +93,7 @@ public class HomeFragment extends Fragment {
     private void initFragment() {
         RecyclerView recyclerView = binding.getRoot().findViewById(R.id.recycle_view);
         recyclerView.addItemDecoration(new SpaceItemDecoration());
-        recyclerView.setAdapter(new ProductsAdapter(products));
+        recyclerView.setAdapter(new OverviewProductAdapter(products));
     }
 
     private void onClickCartBtn(View v) {

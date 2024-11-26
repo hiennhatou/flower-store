@@ -13,43 +13,23 @@ import java.util.List;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.MainFragmentWishlistBinding;
-import edu.ou.flowerstore.db.entities.ProductEntity;
+import edu.ou.flowerstore.utils.adapters.OverviewProductAdapter;
 
 public class WishlistFragment extends Fragment {
     MainFragmentWishlistBinding binding;
-    MutableLiveData<List<ProductEntity>> products;
+    List<OverviewProductAdapter.OverviewProduct> products;
     public WishlistFragment() {
-        ProductEntity product1 = new ProductEntity("Hoa hồng", 120000);
-        product1.thumbnail = R.drawable.boutique;
-
-        ProductEntity product2 = new ProductEntity("Hoa cẩm tú cầu", 120000);
-        product2.thumbnail = R.drawable.camtucau;
-
-        ProductEntity product3 = new ProductEntity("Hoa hồng", 120000);
-        product3.thumbnail = R.drawable.boutique;
-
-        ProductEntity product4 = new ProductEntity("Hoa hồng", 120000);
-        product4.thumbnail = R.drawable.boutique;
-
-        ProductEntity product5 = new ProductEntity("Hoa hồng", 120000);
-        product5.thumbnail = R.drawable.boutique;
-
-        ProductEntity product6 = new ProductEntity("Hoa hồng", 120000);
-        product6.thumbnail = R.drawable.boutique;
-
-        ProductEntity product7 = new ProductEntity("Hoa hồng", 120000);
-        product7.thumbnail = R.drawable.boutique;
-
-        ProductEntity product8 = new ProductEntity("Hoa hồng", 120000);
-        product8.thumbnail = R.drawable.boutique;
-
-        ProductEntity product9 = new ProductEntity("Hoa hồng", 120000);
-        product9.thumbnail = R.drawable.boutique;
-
-        ProductEntity product10 = new ProductEntity("Hoa hồng", 120000);
-        product10.thumbnail = R.drawable.boutique;
-
-        products = new MutableLiveData<>(List.of(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10));
+        OverviewProductAdapter.OverviewProduct product1 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product2 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
+        OverviewProductAdapter.OverviewProduct product3 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product4 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product5 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product6 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product7 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product8 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product9 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        OverviewProductAdapter.OverviewProduct product10 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
+        products = List.of(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10);
     }
 
     public static WishlistFragment newInstance(String param1, String param2) {
@@ -68,7 +48,7 @@ public class WishlistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = MainFragmentWishlistBinding.inflate(inflater, container, false);
-        ProductsAdapter adapter = new ProductsAdapter(products);
+        OverviewProductAdapter adapter = new OverviewProductAdapter(products);
         binding.flowerListView.setAdapter(adapter);
         binding.flowerListView.addItemDecoration(new HomeFragment.SpaceItemDecoration());
         return binding.getRoot();

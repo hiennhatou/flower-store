@@ -42,6 +42,7 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.testing)
+    implementation(libs.picasso)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
