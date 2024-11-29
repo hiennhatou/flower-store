@@ -22,8 +22,4 @@ public class FlowerStoreApplication extends Application {
     public LiveData<Integer> getCartAmount() {
         return cartAmount;
     }
-
-    public void setCartAmount(Integer text) {
-        cartAmount.setValue(text);
-    }
 }

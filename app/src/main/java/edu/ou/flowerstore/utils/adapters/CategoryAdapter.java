@@ -34,7 +34,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OverviewCategory category = categories.get(position);
-        Picasso.get().load(category.getThumbnail()).placeholder(R.drawable.ic_placeholder).into(holder.getThumbnailImageView());
+        Picasso.get().load(category.getThumbnail()).placeholder(R.drawable.placeholder).into(holder.getThumbnailImageView());
         holder.getTitleTextView().setText(category.name);
         holder.getThumbnailImageView().getDrawable().setColorFilter(Color.parseColor("#38000000"), PorterDuff.Mode.DARKEN);
     }

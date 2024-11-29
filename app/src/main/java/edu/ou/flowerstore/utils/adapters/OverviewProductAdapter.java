@@ -49,7 +49,7 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
             v.setSelected(product.isWish());
         });
 
-        Picasso.get().load(product.getThumbnail()).placeholder(R.drawable.ic_placeholder).into(holder.getThumbnailImg());
+        Picasso.get().load(product.getThumbnail()).placeholder(R.drawable.placeholder).into(holder.getThumbnailImg());
     }
 
     @Override
