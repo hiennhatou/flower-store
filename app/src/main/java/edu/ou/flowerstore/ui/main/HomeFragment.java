@@ -3,18 +3,23 @@ package edu.ou.flowerstore.ui.main;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ou.flowerstore.R;
@@ -25,20 +30,12 @@ import edu.ou.flowerstore.utils.adapters.OverviewProductAdapter;
 public class HomeFragment extends Fragment {
     MainFragmentHomeBinding binding;
     List<OverviewProductAdapter.OverviewProduct> products;
+    OverviewProductAdapter productsAdapter;
+    HomeViewModel viewModel;
+    boolean isLoading = false;
 
     public HomeFragment() {
-        OverviewProductAdapter.OverviewProduct product1 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product2 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, true);
-        OverviewProductAdapter.OverviewProduct product3 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product4 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product5 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product6 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product7 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product8 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product9 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-        OverviewProductAdapter.OverviewProduct product10 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầu", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", 4.5, false);
-
-        products = List.of(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10);
+        products = new ArrayList<>();
     }
 
     public static HomeFragment newInstance() {
@@ -51,6 +48,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        viewModel.loadProducts();
+        products = viewModel.getProducts();
+        productsAdapter = new OverviewProductAdapter(products);
     }
 
     @Override
@@ -82,22 +83,38 @@ public class HomeFragment extends Fragment {
     }
 
     private void initEvent() {
-        binding.seeMoreCategories.setOnClickListener(v -> {
-            BottomNavigationView bottomNav = binding.getRoot().getRootView().findViewById(R.id.bottom_navigation);
-            bottomNav.setSelectedItemId(R.id.nav_categories);
-        });
-
-        binding.cartBtn.setOnClickListener(this::onClickCartBtn);
     }
 
     private void initFragment() {
         RecyclerView recyclerView = binding.getRoot().findViewById(R.id.recycle_view);
         recyclerView.addItemDecoration(new SpaceItemDecoration());
-        recyclerView.setAdapter(new OverviewProductAdapter(products));
+        recyclerView.setAdapter(productsAdapter);
+        recyclerView.addOnScrollListener(new OnScrollRecyclerView());
+        viewModel.getLiveDataProducts().observeForever(a -> {
+            productsAdapter.notifyDataSetChanged();
+        });
     }
 
-    private void onClickCartBtn(View v) {
-        Intent intent = new Intent(getContext(), CartActivity.class);
-        startActivity(intent);
+    class OnScrollRecyclerView extends RecyclerView.OnScrollListener {
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+
+            if (!isLoading && gridLayoutManager != null && gridLayoutManager.findLastVisibleItemPosition() == products.size() - 1) {
+                isLoading = true;
+                Task<QuerySnapshot> loading = viewModel.loadProducts();
+                if (loading != null) loading.addOnSuccessListener(v -> {
+                    isLoading = false;
+                });
+                else
+                    isLoading = false;
+            }
+        }
     }
 }
