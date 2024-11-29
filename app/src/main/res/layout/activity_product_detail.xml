@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="450sp"
         android:scaleType="centerCrop"
-        android:src="@drawable/boutique" />
+        android:src="@drawable/ic_placeholder" />
 
     <ScrollView
         android:layout_width="match_parent"

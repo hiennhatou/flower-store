@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Tìm sản phẩm"
-                android:paddingVertical="12sp"/>
+                android:paddingVertical="0sp"/>
         </com.google.android.material.textfield.TextInputLayout>
         <!-- Divider -->
         <androidx.recyclerview.widget.RecyclerView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:itemCount="10"
-            tools:listitem="@layout/main_product_card_item"
+            tools:listitem="@layout/item_overview_product"
             app:spanCount="2" />
     </LinearLayout>
 

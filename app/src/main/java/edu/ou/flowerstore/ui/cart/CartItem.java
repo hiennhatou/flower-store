@@ -1,12 +1,12 @@
-package edu.ou.flowerstore;
+package edu.ou.flowerstore.ui.cart;
 
-public class Item {
+public class CartItem {
     private int image;
     private String name;
     private int price;
     private int rate;
 
-    public Item(int image, String name, int price, int rate) {
+    public CartItem(int image, String name, int price, int rate) {
         this.image = image;
         this.name = name;
         this.price = price;

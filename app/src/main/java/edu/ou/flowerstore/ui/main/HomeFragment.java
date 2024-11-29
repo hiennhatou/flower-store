@@ -3,61 +3,33 @@ package edu.ou.flowerstore.ui.main;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.MainFragmentHomeBinding;
-import edu.ou.flowerstore.db.entities.ProductEntity;
 import edu.ou.flowerstore.ui.cart.CartActivity;
+import edu.ou.flowerstore.utils.adapters.OverviewProductAdapter;
 
 public class HomeFragment extends Fragment {
     MainFragmentHomeBinding binding;
-    MutableLiveData<List<ProductEntity>> products;
+    List<OverviewProductAdapter.OverviewProduct> products;
+    OverviewProductAdapter productsAdapter;
+    HomeViewModel viewModel;
 
     public HomeFragment() {
-        ProductEntity product1 = new ProductEntity("Hoa hồng", 120000);
-        product1.thumbnail = R.drawable.boutique;
-
-        ProductEntity product2 = new ProductEntity("Hoa hồng", 120000);
-        product2.thumbnail = R.drawable.boutique;
-
-        ProductEntity product3 = new ProductEntity("Hoa hồng", 120000);
-        product3.thumbnail = R.drawable.boutique;
-
-        ProductEntity product4 = new ProductEntity("Hoa hồng", 120000);
-        product4.thumbnail = R.drawable.boutique;
-
-        ProductEntity product5 = new ProductEntity("Hoa hồng", 120000);
-        product5.thumbnail = R.drawable.boutique;
-
-        ProductEntity product6 = new ProductEntity("Hoa hồng", 120000);
-        product6.thumbnail = R.drawable.boutique;
-
-        ProductEntity product7 = new ProductEntity("Hoa hồng", 120000);
-        product7.thumbnail = R.drawable.boutique;
-
-        ProductEntity product8 = new ProductEntity("Hoa hồng", 120000);
-        product8.thumbnail = R.drawable.boutique;
-
-        ProductEntity product9 = new ProductEntity("Hoa hồng", 120000);
-        product9.thumbnail = R.drawable.boutique;
-
-        ProductEntity product10 = new ProductEntity("Hoa hồng", 120000);
-        product10.thumbnail = R.drawable.boutique;
-
-        products = new MutableLiveData<>(List.of(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10));
+        products = new ArrayList<>();
     }
 
     public static HomeFragment newInstance() {
@@ -70,6 +42,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        products = viewModel.getProducts();
+        productsAdapter = new OverviewProductAdapter(products);
+        viewModel.loadProducts();
     }
 
     @Override
@@ -112,7 +88,10 @@ public class HomeFragment extends Fragment {
     private void initFragment() {
         RecyclerView recyclerView = binding.getRoot().findViewById(R.id.recycle_view);
         recyclerView.addItemDecoration(new SpaceItemDecoration());
-        recyclerView.setAdapter(new ProductsAdapter(products));
+        recyclerView.setAdapter(productsAdapter);
+        viewModel.getLiveDataProducts().observe(getViewLifecycleOwner(), o -> {
+            productsAdapter.notifyDataSetChanged();
+        });
     }
 
     private void onClickCartBtn(View v) {
