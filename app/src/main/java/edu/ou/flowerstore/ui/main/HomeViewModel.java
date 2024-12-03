@@ -15,7 +15,7 @@ import java.util.List;
 
 import edu.ou.flowerstore.utils.adapters.OverviewProductAdapter;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
-import edu.ou.flowerstore.utils.firebase.collections.ProductCollection;
+
 
 public class HomeViewModel extends ViewModel {
     private final ArrayList<OverviewProductAdapter.OverviewProduct> products = new ArrayList<>();

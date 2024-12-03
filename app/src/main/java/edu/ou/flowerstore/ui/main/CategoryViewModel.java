@@ -8,7 +8,7 @@ import java.util.List;
 
 import edu.ou.flowerstore.utils.adapters.CategoryAdapter;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
-import edu.ou.flowerstore.utils.firebase.collections.CategoryCollection;
+//import edu.ou.flowerstore.utils.firebase.collections.CategoryCollection;
 
 public class CategoryViewModel extends ViewModel {
     private final List<CategoryAdapter.OverviewCategory> categories = new ArrayList<>();
