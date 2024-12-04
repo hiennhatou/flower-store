@@ -1,5 +1,6 @@
 package edu.ou.flowerstore.ui.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +26,14 @@ public class HomeLinearAdapter extends RecyclerView.Adapter<HomeLinearAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getCartBtn().setOnClickListener(v -> {
-            BottomNavigationView bottomNav = holder.getRootView().findViewById(R.id.bottom_navigation);
+        holder.getSeeMoreCategories().setOnClickListener(v -> {
+            BottomNavigationView bottomNav = holder.getRootView().getRootView().findViewById(R.id.bottom_navigation);
             bottomNav.setSelectedItemId(R.id.nav_categories);
         });
 
-        holder.getSeeMoreCategories().setOnClickListener(v -> {
-            Intent intent = new Intent(holder.rootView.getContext(), CartActivity.class);
-            holder.getRootView().getContext().startActivity(intent);
+        holder.getCartBtn().setOnClickListener(v -> {
+            Intent intent = new Intent(holder.getContext(), CartActivity.class);
+            holder.getContext().startActivity(intent);
         });
     }
 
@@ -45,12 +46,14 @@ public class HomeLinearAdapter extends RecyclerView.Adapter<HomeLinearAdapter.Vi
         private final TextView seeMoreCategories;
         private final Button cartBtn;
         private final View rootView;
+        private final Context context;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.seeMoreCategories = itemView.findViewById(R.id.see_more_categories);
             this.cartBtn = itemView.findViewById(R.id.cart_btn);
             this.rootView = itemView.getRootView();
+            this.context = itemView.getContext();
         }
 
         public TextView getSeeMoreCategories() {
@@ -63,6 +66,10 @@ public class HomeLinearAdapter extends RecyclerView.Adapter<HomeLinearAdapter.Vi
 
         public View getRootView() {
             return rootView;
+        }
+
+        public Context getContext() {
+            return context;
         }
     }
 }

@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.firebase.ui.auth)
     implementation(libs.facebook.android.sdk)
     implementation(libs.play.services.auth)
+    implementation(libs.recyclerview)
 
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)

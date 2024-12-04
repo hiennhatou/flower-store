@@ -1,27 +1,27 @@
 package edu.ou.flowerstore.ui.main;
 
+import android.graphics.Rect;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.FieldValue;
 
 import java.util.Date;
 import java.util.List;
 
-import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.MainFragmentWishlistBinding;
 import edu.ou.flowerstore.utils.adapters.OverviewProductAdapter;
 
 public class WishlistFragment extends Fragment {
     MainFragmentWishlistBinding binding;
     List<OverviewProductAdapter.OverviewProduct> products;
+
     public WishlistFragment() {
         OverviewProductAdapter.OverviewProduct product1 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", true, new Timestamp(new Date()));
         OverviewProductAdapter.OverviewProduct product2 = new OverviewProductAdapter.OverviewProduct("1", "Hoa cẩm tú cầm", 120000, "https://hoathangtu.com/wp-content/uploads/2023/03/IMG_1896-scaled.jpg", false, new Timestamp(new Date()));
@@ -54,7 +54,18 @@ public class WishlistFragment extends Fragment {
         binding = MainFragmentWishlistBinding.inflate(inflater, container, false);
         OverviewProductAdapter adapter = new OverviewProductAdapter(products);
         binding.flowerListView.setAdapter(adapter);
-        binding.flowerListView.addItemDecoration(new HomeFragment.SpaceItemDecoration());
+        binding.flowerListView.addItemDecoration(new SpaceItemDecoration());
         return binding.getRoot();
+    }
+
+    static class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view);
+            if (position % 2 == 1) outRect.left = 25;
+            else outRect.right = 25;
+
+            if (position <= state.getItemCount() - 3) outRect.bottom = 40;
+        }
     }
 }

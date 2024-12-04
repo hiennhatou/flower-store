@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="10sp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="16sp">
+        android:layout_marginVertical="10sp"
+        android:gravity="center"
+        android:text="Sản phẩm yêu thích"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10sp"
-            android:gravity="center" 
-            android:text="Sản phẩm yêu thích"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+    <!-- Ô tìm kiếm -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:shapeAppearance="@style/RoundedSquare.50Percent"
+        app:startIconDrawable="@drawable/search">
 
-        <!-- Ô tìm kiếm -->
-        <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:shapeAppearance="@style/RoundedSquare.50Percent"
-            app:hintAnimationEnabled="false"
-            app:startIconDrawable="@drawable/search"
-            app:hintEnabled="false">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Tìm sản phẩm"
-                android:paddingVertical="0sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <!-- Divider -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginVertical="10sp"
-            android:id="@+id/flower_listView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_overview_product"
-            app:spanCount="2" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:hint="Tìm sản phẩm"
+            android:paddingVertical="0sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <!-- Divider -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/flower_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_overview_product" />
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>
