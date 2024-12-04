@@ -15,6 +15,7 @@ constraintlayout = "2.2.0"
 picasso = "2.8"
 playServicesAuth = "21.2.0"
 roomCompiler = "2.6.1"
+firebaseAuth = "23.1.0"
 
 [libraries]
 annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
@@ -37,6 +38,7 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomCompiler" }
 room-testing = { module = "androidx.room:room-testing", version.ref = "roomCompiler" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

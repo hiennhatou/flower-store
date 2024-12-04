@@ -14,6 +14,10 @@ public class AppFirebase {
         return firestore.collection("categories");
     }
 
+    public CollectionReference getUsersCollection() {
+        return firestore.collection("users");
+    }
+
     public FirebaseFirestore getFirestore() {
         return firestore;
     }

@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation(files("../zpdk-release-v3.1.aar"))
+    implementation(libs.firebase.auth)
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.testing)
@@ -63,4 +64,5 @@ dependencies {
     implementation(libs.constraintlayout)
 
     testImplementation(libs.junit)
+
 }
