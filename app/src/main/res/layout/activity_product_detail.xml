@@ -5,294 +5,165 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Product_Detail">
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="700dp"
-        android:background="#AB886D"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ui.productdetail.ProductDetailActivity">
 
     <ScrollView
-        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+        android:layout_height="0sp"
+        app:layout_constraintBottom_toTopOf="@id/action_section"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/img_section"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp">
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/grey">
 
-                <ImageView
-                    android:id="@+id/backBtn"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/back" />
-
-                <ImageView
-                    android:id="@+id/favoBtn"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/backBtn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/fav_icon" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chi tiết sản phẩm"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/backBtn"
-                    app:layout_constraintEnd_toStartOf="@+id/favoBtn"
-                    app:layout_constraintStart_toEndOf="@+id/backBtn"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/product_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_placeholder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="8:7"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imageView17"
-                    android:layout_width="0dp"
-                    android:layout_height="312dp"
-                    android:scaleType="fitCenter"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/backBtn"
-                    app:srcCompat="@drawable/hoatn" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/img_content_divider"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/img_section" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="12sp"
+                android:paddingVertical="14sp">
+
+                <TextView
+                    android:id="@+id/product_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#7B7B7B"
+                    android:textSize="17sp"
+                    tools:text="Tên danh mục của sản phẩm" />
+
+                <TextView
+                    android:id="@+id/product_name"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/white_bg_top_corner"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5sp"
+                    android:textSize="27sp"
+                    android:textStyle="bold"
+                    tools:text="Tên sản phẩm" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mô tả sản phẩm"
+                    android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/titleTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Đóa hoa hồng"
-                            android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/priceTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="*** VNĐ"
-                            android:textColor="#AB886D"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RatingBar
-                            android:id="@+id/ratingBar"
-                            style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:numStars="5"
-                            android:progressTint="#FDD046"
-                            android:rating="4.5"
-                            android:stepSize="0.1"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/ratingTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rating"
-                            android:textColor="@color/black"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/ratingBar"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Mô tả"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/descriptionTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Bó hoa hồng chụp kỷ yếu luôn mang lại những khoảnh khắc đặc biệt đánh dấu sự kết thúc của một chặng đường và sự bắt đầu của một cuộc hành trình mới. Đó là thời điểm mà bạn cùng nhau chia tay với mái trường thân thương, nhìn lại những kỷ niệm đáng nhớ đã được ghi dấu trong lòng mỗi người."
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Sản phẩm tương tự"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/similarView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clipToPadding="false"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/white_bg_full_corner_covien"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/linearLayout">
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="-"
-                        android:textColor="@color/brown"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:gravity="center"
-                        android:text="1"
-                        android:textColor="@color/brown"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="+"
-                        android:textColor="@color/brown"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/product_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:textColor="#7B7B7B"
+                    android:textSize="17sp"
+                    tools:text="Nhưng tôi phải giải thích cho bạn hiểu làm thế nào mà tất cả ý tưởng sai lầm về việc tố cáo niềm vui và ca ngợi nỗi đau đã ra đời và tôi sẽ cung cấp cho bạn một bản tường trình đầy đủ về hệ thống, cũng như giải thích những lời dạy thực tế của nhà thám hiểm chân lý vĩ đại, Người xây dựng nên hạnh phúc của con người. Không ai từ chối, không thích hay tránh xa thú vui, vì nó là thú vui, mà vì những ai không biết theo đuổi thú vui một cách hợp lý sẽ gặp phải những hậu quả vô cùng đau đớn. Cũng không có ai yêu hoặc theo đuổi hoặc mong muốn tự mình đạt được nỗi đau, bởi vì đó là nỗi đau, nhưng đôi khi xảy ra những trường hợp mà sự vất vả và đau đớn có thể mang lại cho anh ta một số niềm vui lớn. Nhưng ai có quyền nhận lỗi với một người đàn ông chọn cách tận hưởng một niềm vui mà không gây ra hậu quả khó chịu, hoặc một người trốn tránh một nỗi đau không tạo ra khoái cảm?
+Mặt khác, chúng tôi tố cáo với sự phẫn nộ chính đáng và chán ghét những người đàn ông bị cám dỗ và mất tinh thần bởi sự quyến rũ của thú vui nhất thời, bị dục vọng làm cho mù quáng, đến nỗi họ không thể lường trước được nỗi đau và rắc rối sắp xảy ra; và trách nhiệm bình đẳng thuộc về những người thất bại trong nhiệm vụ của họ do yếu kém về ý chí, điều này cũng giống như nói khi thu mình lại vì vất vả và đau đớn. Những trường hợp này là hoàn toàn đơn giản và dễ dàng để phân biệt. Trong một giờ rảnh rỗi, khi quyền lực lựa chọn của chúng ta là không có khuôn mẫu và khi không có gì ngăn cản chúng ta có thể làm những gì chúng ta thích nhất, mọi niềm vui đều được chào đón và mọi nỗi đau đều tránh được. Nhưng trong một số trường hợp nhất định và do các yêu cầu về nghĩa vụ hoặc nghĩa vụ kinh doanh, sẽ thường xuyên xảy ra những thú vui phải từ chối và chấp nhận những khó chịu. Do đó, nhà thông thái luôn tuân giữ nguyên tắc lựa chọn này trong những vấn đề: anh ta từ chối những thú vui để đảm bảo những thú vui khác lớn hơn, hoặc anh ta chịu đựng nỗi đau để tránh những cơn đau tồi tệ hơn." />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/action_section"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/yellow_bg"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:shapeAppearance="@style/RoundedSquare">
 
-        <Button
-            android:id="@+id/button"
-            style="@android:style/Widget.Button"
-            android:layout_width="200dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/white_bg_full_corner_covien"
-            android:drawableStart="@drawable/giohang"
-            android:paddingStart="16dp"
-            android:text="Thêm vào giỏ"
-            android:textColor="#AB886D"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:padding="10sp">
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:text="Tổng : "
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:textSize="27sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/add_cart_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="200,000 đ" />
 
-        <TextView
-            android:id="@+id/totalTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="*** VNĐ"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/add_cart_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10sp"
+                android:text="Thêm vào giỏ hàng"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/RoundedSquare.20Percent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="43sp"
+        android:layout_height="43sp"
+        android:layout_marginStart="11sp"
+        android:layout_marginTop="11sp"
+        android:insetLeft="0sp"
+        android:insetTop="0sp"
+        android:insetRight="0sp"
+        android:insetBottom="0sp"
+        app:backgroundTint="@color/white"
+        app:elevation="20sp"
+        app:icon="@drawable/arrow_left"
+        app:iconGravity="textStart"
+        app:iconPadding="3sp"
+        app:iconSize="35sp"
+        app:iconTint="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1sp" />
+
+    <Button
+        android:layout_width="43sp"
+        android:layout_height="43sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="11sp"
+        android:layout_marginEnd="11sp"
+        android:insetLeft="0sp"
+        android:insetTop="0sp"
+        android:insetRight="0sp"
+        android:insetBottom="0sp"
+        app:backgroundTint="@color/white"
+        app:elevation="20sp"
+        app:icon="@drawable/heart"
+        app:iconGravity="textStart"
+        app:iconPadding="0sp"
+        app:iconSize="30sp"
+        app:iconTint="@color/black"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
