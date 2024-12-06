@@ -1,5 +1,7 @@
 package edu.ou.flowerstore.utils.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.ui.productdetail.ProductDetailActivity;
 
 public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProductAdapter.ViewHolder> {
     List<OverviewProduct> products;
@@ -47,6 +50,11 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
             product.setWish(!product.isWish());
             v.setSelected(product.isWish());
         });
+        holder.getThumbnailImg().setOnClickListener(v -> {
+            Intent intent = new Intent(holder.getContext(), ProductDetailActivity.class);
+            intent.putExtra("id", product.getId());
+            holder.getContext().startActivity(intent);
+        });
 
         Picasso.get().load(product.getThumbnail()).placeholder(R.drawable.placeholder).into(holder.getThumbnailImg());
     }
@@ -61,6 +69,7 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
         private final ShapeableImageView thumbnailImg;
         private final TextView priceTextView;
         private final Button wishBtn;
+        private final Context context;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +78,7 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
             thumbnailImg = itemView.findViewById(R.id.thumbnail_image);
             priceTextView = itemView.findViewById(R.id.price);
             wishBtn = itemView.findViewById(R.id.add_wish_btn);
+            context = itemView.getContext();
         }
 
 
@@ -86,6 +96,10 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
 
         public Button getWishBtn() {
             return wishBtn;
+        }
+
+        public Context getContext() {
+            return context;
         }
     }
 

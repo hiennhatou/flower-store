@@ -112,7 +112,6 @@ public class HomeFragment extends Fragment {
         @Override
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-            Log.d("Test", "onScrolled: wqdqwdqwdqwdqwdqwdqw");
             GridLayoutManager gridLayoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
 
             if (!isLoading && gridLayoutManager != null && gridLayoutManager.findLastVisibleItemPosition() == products.size() - 2) {
