@@ -44,12 +44,6 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
         if (product == null) return;
         holder.getTitleTextView().setText(product.getName());
         holder.getPriceTextView().setText(currencyFormat.format(product.getPrice()));
-        holder.getWishBtn().setSelected(product.isWish());
-
-        holder.getWishBtn().setOnClickListener(v -> {
-            product.setWish(!product.isWish());
-            v.setSelected(product.isWish());
-        });
         holder.getThumbnailImg().setOnClickListener(v -> {
             Intent intent = new Intent(holder.getContext(), ProductDetailActivity.class);
             intent.putExtra("id", product.getId());
@@ -68,7 +62,6 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
         private final TextView titleTextView;
         private final ShapeableImageView thumbnailImg;
         private final TextView priceTextView;
-        private final Button wishBtn;
         private final Context context;
 
         public ViewHolder(@NonNull View itemView) {
@@ -77,7 +70,6 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
             titleTextView = itemView.findViewById(R.id.title);
             thumbnailImg = itemView.findViewById(R.id.thumbnail_image);
             priceTextView = itemView.findViewById(R.id.price);
-            wishBtn = itemView.findViewById(R.id.add_wish_btn);
             context = itemView.getContext();
         }
 
@@ -94,9 +86,6 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
             return priceTextView;
         }
 
-        public Button getWishBtn() {
-            return wishBtn;
-        }
 
         public Context getContext() {
             return context;
@@ -112,12 +101,11 @@ public class OverviewProductAdapter extends RecyclerView.Adapter<OverviewProduct
 
         private Timestamp createdDate;
 
-        public OverviewProduct(String id, String name, long price, String thumbnail, boolean isWish, Timestamp createdDate) {
+        public OverviewProduct(String id, String name, long price, String thumbnail, Timestamp createdDate) {
             this.setId(id);
             this.setName(name);
             this.setPrice(price);
             this.setThumbnail(thumbnail);
-            this.setWish(isWish);
             this.setCreatedDate(createdDate);
         }
 

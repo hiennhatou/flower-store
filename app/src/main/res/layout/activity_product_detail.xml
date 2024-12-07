@@ -169,6 +169,7 @@ Mặt khác, chúng tôi tố cáo với sự phẫn nộ chính đáng và chá
         app:strokeWidth="1sp" />
 
     <Button
+        android:id="@+id/cart_btn"
         android:layout_width="43sp"
         android:layout_height="43sp"
         android:layout_gravity="end"
@@ -180,7 +181,7 @@ Mặt khác, chúng tôi tố cáo với sự phẫn nộ chính đáng và chá
         android:insetBottom="0sp"
         app:backgroundTint="@color/white"
         app:elevation="20sp"
-        app:icon="@drawable/heart"
+        app:icon="@drawable/ic_cart"
         app:iconGravity="textStart"
         app:iconPadding="0sp"
         app:iconSize="30sp"

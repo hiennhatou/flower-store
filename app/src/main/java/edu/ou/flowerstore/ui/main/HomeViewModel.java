@@ -44,7 +44,7 @@ public class HomeViewModel extends ViewModel {
                 Long price = snapshot.getLong("price") != null ? snapshot.getLong("price") : Long.valueOf(0);
                 String id = snapshot.getId();
                 Timestamp createdDate = snapshot.getTimestamp("created_date");
-                products.add(new OverviewProductAdapter.OverviewProduct(id, name, price, thumbnail, true, createdDate));
+                products.add(new OverviewProductAdapter.OverviewProduct(id, name, price, thumbnail, createdDate));
             });
             liveDataProducts.setValue(products);
         });

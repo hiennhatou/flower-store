@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/thumbnail_image"
             android:layout_width="match_parent"
@@ -23,22 +22,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/RoundedSquare.10Percent" />
-
-        <Button
-            android:id="@+id/add_wish_btn"
-            style="@style/Button.IconOnly.Outlined"
-            android:layout_width="38sp"
-            android:layout_height="38sp"
-            android:layout_gravity="end"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="7sp"
-            android:backgroundTint="@color/wish_background_tint"
-            android:elevation="2sp"
-            app:icon="@drawable/heart"
-            app:iconTint="@color/wish_icon_tint"
-            app:iconSize="28sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

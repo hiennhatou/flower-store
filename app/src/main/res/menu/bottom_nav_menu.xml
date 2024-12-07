@@ -6,11 +6,6 @@
         android:title="Trang chủ" />
 
     <item
-        android:id="@+id/nav_wishlist"
-        android:icon="@drawable/ic_wishlist"
-        android:title="Yêu thích" />
-
-    <item
         android:id="@+id/nav_categories"
         android:icon="@drawable/ic_categories"
         android:title="Danh mục" />

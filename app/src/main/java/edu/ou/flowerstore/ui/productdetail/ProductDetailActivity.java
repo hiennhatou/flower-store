@@ -26,6 +26,7 @@ import java.util.zip.Inflater;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityProductDetailBinding;
+import edu.ou.flowerstore.ui.cart.CartActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 import edu.ou.flowerstore.utils.firebase.documents.CategoryDocument;
 
@@ -48,6 +49,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             return insets;
         });
         binding.backBtn.setOnClickListener(v -> {
+            finish();
+        });
+        binding.cartBtn.setOnClickListener(v -> {
+            Intent cartIntent = new Intent(this, CartActivity.class);
+            startActivity(cartIntent);
             finish();
         });
         fetchProduct();

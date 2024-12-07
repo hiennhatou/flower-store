@@ -47,12 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
                 break;
             case 1:
-                binding.bottomNavigation.setSelectedItemId(R.id.nav_wishlist);
-                break;
-            case 2:
                 binding.bottomNavigation.setSelectedItemId(R.id.nav_categories);
                 break;
-            case 3:
+            case 2:
                 binding.bottomNavigation.setSelectedItemId(R.id.nav_profile);
                 break;
         }
@@ -60,13 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean onSelectHeader(MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
-            binding.pager.setCurrentItem(0, false);
-        } else if (item.getItemId() == R.id.nav_wishlist) {
-            binding.pager.setCurrentItem(1, false);
+            binding.pager.setCurrentItem(0);
         } else if (item.getItemId() == R.id.nav_categories) {
-            binding.pager.setCurrentItem(2, false);
+            binding.pager.setCurrentItem(1);
         } else if (item.getItemId() == R.id.nav_profile) {
-            binding.pager.setCurrentItem(3, false);
+            binding.pager.setCurrentItem(2);
         }
         return true;
     }
