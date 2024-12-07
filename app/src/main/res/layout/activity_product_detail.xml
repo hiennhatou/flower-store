@@ -22,8 +22,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/img_section"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/grey">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/product_img"
@@ -33,7 +32,8 @@
                     android:src="@drawable/ic_placeholder"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="8:7"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:backgroundTint="@color/grey"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -50,13 +50,34 @@
                 android:paddingHorizontal="12sp"
                 android:paddingVertical="14sp">
 
-                <TextView
-                    android:id="@+id/product_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#7B7B7B"
-                    android:textSize="17sp"
-                    tools:text="Tên danh mục của sản phẩm" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/product_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#7B7B7B"
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Tên danh mục của sản phẩm" />
+
+
+                    <TextView
+                        android:id="@+id/rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4sp"
+                        android:drawableStart="@drawable/star"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="5,0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/product_name"
@@ -111,15 +132,17 @@ Mặt khác, chúng tôi tố cáo với sự phẫn nộ chính đáng và chá
                 tools:text="200,000 đ" />
 
             <Button
+                style="@style/Widget.Material3.Button.Icon"
                 android:id="@+id/add_cart_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10sp"
                 android:text="Thêm vào giỏ hàng"
+                app:icon="@drawable/ic_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearance="@style/RoundedSquare.20Percent" />
+                app:shapeAppearance="@style/RoundedSquare.30Percent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 

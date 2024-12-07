@@ -13,9 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.firestore.AggregateField;
+import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.DocumentReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +34,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     AppFirebase appFirebase = new AppFirebase();
     Locale locale = new Locale("vi", "vn");
     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+    DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +73,14 @@ public class ProductDetailActivity extends AppCompatActivity {
             categories.get(0).get().addOnSuccessListener(categorySnapshot -> {
                binding.productCategory.setText(categorySnapshot.getString("name"));
             });
-
+            snapshot.getReference().collection("reviews").aggregate(AggregateField.average("rate")).get(AggregateSource.SERVER).addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult().get(AggregateField.average("rate")) != null) {
+                    double result = task.getResult().get(AggregateField.average("rate"));
+                    binding.rate.setText(decimalFormat.format(result));
+                } else {
+                    binding.rate.setText("5,0");
+                }
+            });
             binding.productName.setText(productName);
             binding.productDescription.setText(Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY));
             binding.productPrice.setText(currencyFormat.format(price));
