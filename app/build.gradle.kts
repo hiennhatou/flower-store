@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.testing)
     implementation(libs.picasso)
+    implementation(libs.mpandroidchart)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
