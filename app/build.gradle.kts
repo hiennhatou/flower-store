@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "edu.ou.flowerstore"
-        minSdk = 26
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -42,6 +42,7 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.testing)
+    implementation(libs.room.guava)
     implementation(libs.picasso)
     implementation(libs.mpandroidchart)
 
@@ -55,6 +56,8 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.common.java8)
+    implementation(libs.guava)
+    implementation(libs.concurrent.futures)
 
     implementation(libs.annotation)
     implementation(libs.flexbox)

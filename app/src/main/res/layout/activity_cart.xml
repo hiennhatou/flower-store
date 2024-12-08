@@ -35,7 +35,8 @@
             style="@style/Button.IconOnly.Outlined"
             android:layout_width="35sp"
             android:layout_height="35sp"
-            android:paddingStart="6sp"
+            android:paddingStart="2sp"
+            android:paddingEnd="6sp"
             app:icon="@drawable/ic_back"
             app:iconSize="30sp"
             app:iconTint="@color/black"
@@ -57,18 +58,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCartItems"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:visibility="gone"
-            tools:listitem="@layout/item_cart_product" />
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Không có sản phẩm trong giỏ hàng"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
+            android:padding="8dp"
+            tools:listitem="@layout/item_cart_product" />
     </LinearLayout>
 
 
@@ -82,128 +74,9 @@
         android:paddingHorizontal="16dp"
         android:paddingVertical="8sp"
         app:layout_constraintBottom_toBottomOf="parent">
-
-        <!-- Khu vực nhập mã giảm giá -->
-        <LinearLayout
-            android:id="@+id/promoCodeContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edittext_background"
-            android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/cartSummaryContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <EditText
-                android:id="@+id/etPromoCode"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="Mã giảm giá"
-                android:paddingHorizontal="8dp"
-                android:textColor="#888888"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/btnApplyPromo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:paddingHorizontal="16dp"
-                android:text="Áp dụng"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                app:shapeAppearance="@style/RoundedSquare.20Percent" />
-        </LinearLayout>
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Tạm tính"
-                android:textColor="#888888"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tvSubtotal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="$407.94"
-                android:textColor="#444444"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Phí vận chuyển"
-                android:textColor="#888888"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tvDeliveryFee"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="$25.00"
-                android:textColor="#444444"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Giảm giá"
-                android:textColor="#888888"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tvDiscount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="-$35.00"
-                android:textColor="#444444"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -213,7 +86,7 @@
                 android:layout_weight="1"
                 android:text="Tổng tiền"
                 android:textColor="#222222"
-                android:textSize="14sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/tvTotalCost"
@@ -221,9 +94,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="$397.94"
+                tools:text="$397.94"
                 android:textColor="#222222"
-                android:textSize="14sp" />
+                android:textSize="22sp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <!-- Nút Tiến hành thanh toán -->

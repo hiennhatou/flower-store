@@ -23,19 +23,6 @@
             app:icon="@drawable/search" />
 
         <Button
-            android:id="@+id/notify_btn"
-            style="@style/Button.IconOnly.Outlined"
-            android:layout_width="30sp"
-            android:layout_height="30sp"
-            android:layout_marginStart="5sp"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="centerInside"
-            app:icon="@drawable/bell"
-            app:iconSize="25sp"
-            app:strokeWidth="0sp"
-            app:tint="?attr/colorPrimary" />
-
-        <Button
             android:id="@+id/cart_btn"
             style="@style/Button.IconOnly.Outlined"
             android:layout_width="30sp"
@@ -44,7 +31,7 @@
             android:backgroundTint="#00FFFFFF"
             android:scaleType="centerInside"
             app:icon="@drawable/bag_fill"
-            app:iconSize="25sp"
+            app:iconSize="28sp"
             app:strokeWidth="0sp"
             app:tint="?attr/colorPrimary" />
 

@@ -3,7 +3,6 @@ package edu.ou.flowerstore.ui.productdetail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,25 +21,28 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
-import java.util.zip.Inflater;
 
+import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityProductDetailBinding;
+import edu.ou.flowerstore.db.RoomDB;
 import edu.ou.flowerstore.ui.cart.CartActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
-import edu.ou.flowerstore.utils.firebase.documents.CategoryDocument;
 
 public class ProductDetailActivity extends AppCompatActivity {
-    ActivityProductDetailBinding binding;
-    AppFirebase appFirebase = new AppFirebase();
-    Locale locale = new Locale("vi", "vn");
-    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
-    DecimalFormat decimalFormat = new DecimalFormat("#.#");
+    private ActivityProductDetailBinding binding;
+    private RoomDB roomDB;
+    private final AppFirebase appFirebase = new AppFirebase();
+    private final Locale locale = new Locale("vi", "vn");
+    private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+    private final DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProductDetailBinding.inflate(getLayoutInflater());
+        roomDB = FlowerStoreApplication.getInstance().getRoomDB();
+
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -89,6 +91,9 @@ public class ProductDetailActivity extends AppCompatActivity {
             binding.productName.setText(productName);
             binding.productDescription.setText(Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY));
             binding.productPrice.setText(currencyFormat.format(price));
+            binding.addCartBtn.setOnClickListener(v -> {
+                roomDB.cartDAO().increaseProductInCart(snapshot.getId());
+            });
             Picasso.get().load(images.get(0)).into(binding.productImg);
         }).addOnFailureListener(command -> {
             failFetch(id);
