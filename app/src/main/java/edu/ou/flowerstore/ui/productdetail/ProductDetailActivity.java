@@ -54,7 +54,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         binding.cartBtn.setOnClickListener(v -> {
             Intent cartIntent = new Intent(this, CartActivity.class);
             startActivity(cartIntent);
-            finish();
         });
         fetchProduct();
     }
