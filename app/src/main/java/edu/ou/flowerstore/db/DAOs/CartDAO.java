@@ -23,7 +23,7 @@ public interface CartDAO {
 
     @Query("select * from carts where id in (:id)")
     LiveData<CartEntity> getInCartByIds(long ...id);
-
+  
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     List<Long> insertInCart(CartEntity ...carts);
 

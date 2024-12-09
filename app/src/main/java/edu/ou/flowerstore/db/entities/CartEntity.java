@@ -12,7 +12,6 @@ public class CartEntity extends BaseEntity {
 
     @ColumnInfo()
     String product_id;
-
     public int getQuantity() {
         return quantity;
     }
