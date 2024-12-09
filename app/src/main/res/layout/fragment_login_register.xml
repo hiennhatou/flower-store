@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="20sp"
+    tools:context=".ui.profile.LoginRegisterFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:gravity="center"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="#77604E"
+        android:text="Đăng nhập để trải nghiệm mua sắm tốt hơn nhé!"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_illus"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="10sp">
+        <Button
+            style="@style/Widget.Material3.Button.Icon"
+            android:id="@+id/sign_in_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10sp"
+            android:text="Đăng nhặp"
+            app:icon="@drawable/ic_login"
+            app:shapeAppearance="@style/RoundedSquare.30Percent" />
+
+        <Button
+            style="@style/Widget.Material3.Button.Icon"
+            android:id="@+id/register_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10sp"
+            android:text="Đăng ký"
+            app:icon="@drawable/ic_register"
+            app:shapeAppearance="@style/RoundedSquare.30Percent" />
+    </LinearLayout>
+
+</LinearLayout>

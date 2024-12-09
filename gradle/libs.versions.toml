@@ -24,6 +24,7 @@ roomCompiler = "2.6.1"
 annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
 concurrent-futures = { module = "androidx.concurrent:concurrent-futures", version.ref = "concurrentFutures" }
 facebook-android-sdk = { module = "com.facebook.android:facebook-android-sdk", version.ref = "facebookAndroidSdk" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore", version = "25.1.1" }
 firebase-ui-auth = { module = "com.firebaseui:firebase-ui-auth", version.ref = "firebaseUiAuth" }

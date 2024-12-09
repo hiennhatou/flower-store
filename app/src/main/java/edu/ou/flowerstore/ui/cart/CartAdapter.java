@@ -27,7 +27,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     Locale locale = new Locale("vi", "vn");
     NumberFormat currentCurrencyFormat = NumberFormat.getCurrencyInstance(locale);
     private final RoomDB roomDB = FlowerStoreApplication.getInstance().getRoomDB();
-    private final List<CartItem> cartItems;
+    private List<CartItem> cartItems;
 
     public CartAdapter(List<CartItem> cartItems) {
         this.cartItems = cartItems;
@@ -87,5 +87,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             decrementBtn = itemView.findViewById(R.id.btnDecreaseQuantity);
             trashBtn = itemView.findViewById(R.id.btn_trash);
         }
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }
