@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ou.flowerstore.utils.adapters.CategoryAdapter;
-import edu.ou.flowerstore.utils.firebase.collections.CategoryCollection;
+import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class CategoryViewModel extends ViewModel {
     private final List<CategoryAdapter.OverviewCategory> categories = new ArrayList<>();
     private final MutableLiveData<List<CategoryAdapter.OverviewCategory>> liveDataCategories = new MutableLiveData<>(categories);
-    private final CategoryCollection categoryCollection = new CategoryCollection();
+    private final AppFirebase appFirebase = new AppFirebase();
 
     public List<CategoryAdapter.OverviewCategory> getCategories() {
         return categories;
@@ -23,7 +23,7 @@ public class CategoryViewModel extends ViewModel {
     }
 
     public void loadCategories() {
-        categoryCollection.getAllCategories().addOnSuccessListener(snapshot -> {
+        appFirebase.getCategoriesCollection().get().addOnSuccessListener(snapshot -> {
             snapshot.getDocuments().forEach(category -> {
                 String name = category.getString("name");
                 String thumbnail = category.getString("thumbnail");

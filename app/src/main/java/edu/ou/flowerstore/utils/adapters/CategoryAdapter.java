@@ -1,7 +1,9 @@
 package edu.ou.flowerstore.utils.adapters;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.ui.categorydetail.CategoryDetailActivity;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     List<OverviewCategory> categories;
@@ -34,9 +37,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OverviewCategory category = categories.get(position);
-        Picasso.get().load(category.getThumbnail()).placeholder(R.drawable.placeholder).into(holder.getThumbnailImageView());
-        holder.getTitleTextView().setText(category.name);
-        holder.getThumbnailImageView().getDrawable().setColorFilter(Color.parseColor("#38000000"), PorterDuff.Mode.DARKEN);
+        Picasso.get().load(category.getThumbnail()).placeholder(R.drawable.placeholder).into(holder.thumbnailImageView);
+        holder.titleTextView.setText(category.name);
+        holder.thumbnailImageView.getDrawable().setColorFilter(Color.parseColor("#38000000"), PorterDuff.Mode.DARKEN);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), CategoryDetailActivity.class);
+            intent.putExtra("id", category.id);
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -47,19 +55,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView thumbnailImageView;
         private final TextView titleTextView;
+        private final View itemView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.itemView = itemView;
             thumbnailImageView = itemView.findViewById(R.id.background_img);
             titleTextView = itemView.findViewById(R.id.category_title);
-        }
-
-        public ImageView getThumbnailImageView() {
-            return thumbnailImageView;
-        }
-
-        public TextView getTitleTextView() {
-            return titleTextView;
         }
     }
 

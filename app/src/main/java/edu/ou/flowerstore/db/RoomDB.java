@@ -8,9 +8,5 @@ import edu.ou.flowerstore.db.entities.CartEntity;
 
 @Database(entities = {CartEntity.class}, views = {}, version = 1)
 public abstract class RoomDB extends RoomDatabase {
-    private CartDAO cartDAO;
-
-    public CartDAO getCartDAO() {
-        return cartDAO;
-    }
+    public abstract CartDAO cartDAO();
 }

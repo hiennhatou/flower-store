@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="horizontal"
-    android:paddingHorizontal="27sp"
     android:theme="@style/Theme.FlowerStore">
 
+    <Button
+        android:id="@+id/iv_back"
+        style="@style/Button.IconOnly.Outlined"
+        android:layout_width="32sp"
+        android:layout_height="0sp"
+        app:strokeWidth="2sp"
+        android:layout_margin="10sp"
+        app:icon="@drawable/ic_back"
+        app:iconSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="28sp">
 
         <!-- Logo hoặc tên ứng dụng -->
         <ImageView
@@ -55,14 +70,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etName"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:hint="Tên đăng nhập"
+            android:layout_height="wrap_content"
+            android:hint="Họ tên"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvWelcomeMessage"
             app:shapeAppearance="@style/RoundedSquare.30Percent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +88,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etEmail"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:hint="Email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +96,7 @@
             app:shapeAppearance="@style/RoundedSquare.30Percent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress" />
@@ -91,7 +108,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/relativePasswordLayout"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:hint="Mật khẩu"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +117,7 @@
             app:shapeAppearance="@style/RoundedSquare.30Percent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword" />
@@ -110,10 +128,9 @@
         <CheckBox
             android:id="@+id/cbTerms"
             android:layout_width="wrap_content"
-            android:layout_height="54dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Đồng ý với"
-            android:textColor="#000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/relativePasswordLayout" />
 
@@ -135,30 +152,20 @@
             android:id="@+id/btnSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="Đăng ký"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cbTerms"
-            app:shapeAppearance="@style/RoundedSquare.30Percent"/>
-
-        <!-- Đường phân cách -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="#DADADA"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
+            app:shapeAppearance="@style/RoundedSquare.30Percent" />
 
         <TextView
             android:id="@+id/tvOrSignUpWith"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="17dp"
             android:text="Hoặc đăng ký với"
             android:textColor="#A0A0A0"
             android:textSize="14sp"
@@ -171,11 +178,11 @@
             android:id="@+id/linearLayoutSocialIcons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvOrSignUpWith">
+            app:layout_constraintTop_toBottomOf="@+id/tvOrSignUpWith">
 
             <ImageView
                 android:id="@+id/ivGoogle"
@@ -196,7 +203,7 @@
             android:id="@+id/tvSignInLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="14dp"
             android:text="Đã có tài khoản? Đăng nhập"
             android:textColor="#AB886D"
             android:textSize="14sp"
@@ -205,4 +212,4 @@
             app:layout_constraintTop_toBottomOf="@id/linearLayoutSocialIcons" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

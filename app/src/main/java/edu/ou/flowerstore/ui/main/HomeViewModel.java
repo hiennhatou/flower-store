@@ -3,26 +3,48 @@ package edu.ou.flowerstore.ui.main;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldPath;
+import com.google.firebase.firestore.Filter;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import edu.ou.flowerstore.utils.adapters.OverviewProductAdapter;
-import edu.ou.flowerstore.utils.firebase.collections.ProductCollection;
+import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class HomeViewModel extends ViewModel {
-    private ArrayList<OverviewProductAdapter.OverviewProduct> products = new ArrayList<>();
-    private MutableLiveData<List<OverviewProductAdapter.OverviewProduct>> liveDataProducts = new MutableLiveData<>(products);
+    private final ArrayList<OverviewProductAdapter.OverviewProduct> products = new ArrayList<>();
+    private final MutableLiveData<List<OverviewProductAdapter.OverviewProduct>> liveDataProducts = new MutableLiveData<>(products);
+    private boolean isEndOfProductCollection = false;
+    private final AppFirebase appFirebase = new AppFirebase();
 
-    ProductCollection productCollection = new ProductCollection();
+    public Task<QuerySnapshot> loadProducts() {
+        if (isEndOfProductCollection) return null;
+        Query query = appFirebase.getProductsCollection().orderBy("created_date", Query.Direction.DESCENDING).orderBy(FieldPath.documentId(), Query.Direction.ASCENDING).limit(10);
+        if (!products.isEmpty()) {
+            OverviewProductAdapter.OverviewProduct lastProduct = products.get(products.size() - 1);
+            query = query.where(Filter.or(
+                    Filter.and(Filter.equalTo("created_date", lastProduct.getCreatedDate()), Filter.greaterThan(FieldPath.documentId(), lastProduct.getId())),
+                    Filter.lessThan("created_date", lastProduct.getCreatedDate())
+            ));
+        }
 
-    public void loadProducts() {
-        productCollection.getAllProducts().addOnSuccessListener(result -> {
+        return query.get().addOnSuccessListener(result -> {
+            if (result.size() < 10) isEndOfProductCollection = true;
             result.getDocuments().forEach(snapshot -> {
                 String name = snapshot.getString("name");
                 String thumbnail = ((List<String>) snapshot.get("image")).get(0);
                 Long price = snapshot.getLong("price") != null ? snapshot.getLong("price") : Long.valueOf(0);
                 String id = snapshot.getId();
-                products.add(new OverviewProductAdapter.OverviewProduct(id, name, price, thumbnail, 2.5, true));
+                Timestamp createdDate = snapshot.getTimestamp("created_date");
+                products.add(new OverviewProductAdapter.OverviewProduct(id, name, price, thumbnail, createdDate));
             });
             liveDataProducts.setValue(products);
         });
