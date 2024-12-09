@@ -2,28 +2,27 @@ package edu.ou.flowerstore;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.room.Room;
+
+import edu.ou.flowerstore.db.RoomDB;
 
 public class FlowerStoreApplication extends Application {
     static private FlowerStoreApplication instance;
-    private final MutableLiveData<Integer> cartAmount = new MutableLiveData<>(0);
+
+    private RoomDB roomDB;
 
     @Override
     public void onCreate() {
         super.onCreate();
         FlowerStoreApplication.instance = this;
+        roomDB = Room.databaseBuilder(this.getApplicationContext(), RoomDB.class, "littleflower").allowMainThreadQueries().build();
     }
 
     public static FlowerStoreApplication getInstance() {
         return instance;
     }
 
-    public LiveData<Integer> getCartAmount () {
-        return cartAmount;
-    }
-
-    public void setCartAmount(Integer text) {
-        cartAmount.setValue(text);
+    public RoomDB getRoomDB() {
+        return roomDB;
     }
 }
