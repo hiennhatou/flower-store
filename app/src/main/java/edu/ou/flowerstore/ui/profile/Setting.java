@@ -3,11 +3,12 @@ package edu.ou.flowerstore.ui.profile;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.ou.flowerstore.R;
 
-public class setting extends AppCompatActivity {
+public class Setting extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

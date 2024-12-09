@@ -29,7 +29,7 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(this).get(CartViewModel.class);
-        cartAdapter = new CartAdapter(viewModel.getCartItems());
+        cartAdapter = new CartAdapter(viewModel.getCartItemsLiveData().getValue());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -45,8 +45,9 @@ public class CartActivity extends AppCompatActivity {
         binding.recyclerViewCartItems.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewCartItems.setAdapter(cartAdapter);
         viewModel.getCartItemsLiveData().observe(this, data -> {
+            cartAdapter.setCartItems(data);
             cartAdapter.notifyDataSetChanged();
-            long totalPrice = viewModel.getCartItems().stream().map(cart -> cart.getQuantity() * cart.getPrice()).reduce(0L, Long::sum);
+            long totalPrice = data.stream().map(cart -> cart.getQuantity() * cart.getPrice()).reduce(0L, Long::sum);
             binding.tvTotalCost.setText(currencyFormat.format(totalPrice));
         });
     }
