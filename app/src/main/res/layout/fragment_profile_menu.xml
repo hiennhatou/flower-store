@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -16,13 +16,13 @@
         android:layout_gravity="center_horizontal">
 
         <!-- Profile Image with shadow -->
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearance="@style/RoundedSquare.50Percent"
             android:id="@+id/profile_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/circle_background"
-            android:elevation="8dp"
+            android:elevation="2sp"
             android:scaleType="centerCrop" />
 
         <!-- Edit Icon Overlay on Profile Image -->
@@ -36,7 +36,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
-        android:text="Esther Howard"
+        tools:text="Esther Howard"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold" />

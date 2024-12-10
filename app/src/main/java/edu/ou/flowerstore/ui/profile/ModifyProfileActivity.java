@@ -1,6 +1,7 @@
 package edu.ou.flowerstore.ui.profile;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -9,13 +10,34 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.databinding.ActivityModifyProfileBinding;
+import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class ModifyProfileActivity extends AppCompatActivity {
+    private ActivityModifyProfileBinding binding;
+    private final AppFirebase appFirebase = new AppFirebase();
+    private final FirebaseUser user = appFirebase.getFirebaseAuth().getCurrentUser();
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("vi", "vn"));
+    MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Chọn ngày sinh").build();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify_profile);
+        binding = ActivityModifyProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.statusBars());
@@ -23,8 +45,57 @@ public class ModifyProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        findViewById(R.id.ivBack).setOnClickListener(v -> {
+        if (user == null) finish();
+
+        initProfile();
+
+        datePicker.addOnPositiveButtonClickListener(v -> {
+            binding.birthday.setText(dateFormat.format(new Date(v)));
+        });
+
+        binding.ivBack.setOnClickListener(v -> {
             finish();
+        });
+
+        binding.birthdaySection.setOnClickListener(v -> {
+            datePicker.show(getSupportFragmentManager(), null);
+        });
+
+        binding.birthday.setOnClickListener(v -> {
+            datePicker.show(getSupportFragmentManager(), null);
+        });
+
+        binding.btnCompleteProfile.setOnClickListener(v -> {
+            if (user == null) return;
+            String name = binding.edtName.getText() != null ? binding.edtName.getText().toString().trim() : null;
+            String phoneNumber = binding.edtPhoneNumber.getText() != null ? binding.edtPhoneNumber.getText().toString().trim() : null;
+            String gender = binding.gender.getText() != null ? binding.gender.getText().toString().trim() : null;
+            String birthday = binding.birthday.getText() != null ? binding.birthday.getText().toString().trim() : null;
+            Map<String, Object> updatedData = new HashMap<>();
+            updatedData.put("name", name);
+            updatedData.put("phoneNumber", phoneNumber);
+            updatedData.put("gender", gender);
+            try {
+                updatedData.put("birthday", dateFormat.parse(birthday));
+            } catch (ParseException ignored) {
+
+            }
+            appFirebase.getUsersCollection().document(user.getUid()).update(updatedData).addOnCompleteListener(task -> {
+                Toast.makeText(this, task.isSuccessful() ? "Lưu thành công" : "Lỗi", Toast.LENGTH_LONG).show();
+            });
+        });
+    }
+
+    private void initProfile() {
+        appFirebase.getUsersCollection().document(user.getUid()).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot result = task.getResult();
+                Picasso.get().load(result.getString("avatar")).into(binding.ivAvatar);
+                binding.edtName.setText(result.getString("name"));
+                binding.edtPhoneNumber.setText(result.getString("phoneNumber"));
+                binding.gender.setText(result.getString("gender"), false);
+                binding.birthday.setText(result.getDate("birthday") == null ? null : dateFormat.format(result.getDate("birthday")));
+            }
         });
     }
 }
