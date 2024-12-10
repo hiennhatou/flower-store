@@ -1,6 +1,8 @@
 package edu.ou.flowerstore;
 
 import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -79,5 +81,9 @@ public class FlowerStoreApplication extends Application {
 
     public static FlowerStoreApplication getInstance() {
         return instance;
+    }
+
+    public AppFirebase getAppFirebase() {
+        return appFirebase;
     }
 }

@@ -22,11 +22,12 @@ import com.squareup.picasso.Picasso;
 import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.ui.cart.CartActivity;
+import edu.ou.flowerstore.ui.orders.CustomerOrdersActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class ProfileMenuFragment extends Fragment {
-    private final AppFirebase appFirebase = new AppFirebase();
     private final FlowerStoreApplication application = FlowerStoreApplication.getInstance();
+    private final AppFirebase appFirebase = application.getAppFirebase();
     private View view;
     private Context context;
     private AlertDialog alertDialog;
@@ -57,6 +58,8 @@ public class ProfileMenuFragment extends Fragment {
         LinearLayout profileBtn = view.findViewById(R.id.profile_btn);
         LinearLayout cartBtn = view.findViewById(R.id.cart_btn);
         LinearLayout logoutBtn = view.findViewById(R.id.log_out_button);
+        LinearLayout orderBtn = view.findViewById(R.id.order_btn);
+
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_logout_confirmation, null);
         dialogView.findViewById(R.id.logout_button).setOnClickListener(l -> {
@@ -73,7 +76,9 @@ public class ProfileMenuFragment extends Fragment {
         profileBtn.setOnClickListener(v -> {
             context.startActivity(new Intent(context, ModifyProfileActivity.class));
         });
-
+        orderBtn.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, CustomerOrdersActivity.class));
+        });
         cartBtn.setOnClickListener(v -> {
             context.startActivity(new Intent(context, CartActivity.class));
         });
