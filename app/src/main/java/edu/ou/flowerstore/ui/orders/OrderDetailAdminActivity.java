@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -45,10 +46,17 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(this, productList);
         productRecyclerView.setAdapter(productAdapter);
 
-        loadOrderDetails("0M2r4ayNhd5mhmSZKvFb"); // order id mẫu trong firebase
+        loadOrderDetails("tL5yTg5nE5wh7npTenc9"); // ID mẫu trong Firestore, test order khác thì đổi ở đây
 
-        rejectButton.setOnClickListener(v -> Toast.makeText(this, "Đã từ chối đơn hàng!", Toast.LENGTH_SHORT).show());
-        completeButton.setOnClickListener(v -> Toast.makeText(this, "Đã hoàn thành đơn hàng!", Toast.LENGTH_SHORT).show());
+        rejectButton.setOnClickListener(v -> {
+            updateOrderStatus("denied", null);
+            Toast.makeText(this, "Đã từ chối đơn hàng!", Toast.LENGTH_SHORT).show();
+        });
+
+        completeButton.setOnClickListener(v -> {
+            updateOrderStatus("completed", System.currentTimeMillis());
+            Toast.makeText(this, "Đã hoàn thành đơn hàng!", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void loadOrderDetails(String orderId) {
@@ -57,7 +65,21 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
                 orderIdTextView.setText("Mã đơn hàng: " + orderId);
                 customerNameTextView.setText("Tên khách hàng: Nguyễn Văn A");
                 shippingAddressTextView.setText("Địa chỉ giao hàng: 1 Quang Trung, P.1, Q.1, TP.HCM");
-                orderStatusTextView.setText("Trạng thái: Đang đợi xử lý");
+
+                String status = orderSnapshot.getString("status");
+                orderStatusTextView.setText("Trạng thái: " + translateStatus(status));
+
+                // Xử lý kích hoạt/tắt nút dựa trên trạng thái
+                if ("pending".equals(status)) {
+                    updateButtonState(rejectButton, true);
+                    updateButtonState(completeButton, true);
+                } else if ("paying".equals(status)) {
+                    updateButtonState(rejectButton, true);
+                    updateButtonState(completeButton, false);
+                } else {
+                    updateButtonState(rejectButton, false);
+                    updateButtonState(completeButton, false);
+                }
 
                 List<Map<String, Object>> products = (List<Map<String, Object>>) orderSnapshot.get("products");
                 if (products != null) {
@@ -87,5 +109,40 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
                 }
             }
         }).addOnFailureListener(e -> Toast.makeText(this, "Không thể tải thông tin đơn hàng!", Toast.LENGTH_SHORT).show());
+    }
+
+    private String translateStatus(String status) {
+        switch (status) {
+            case "pending": return "Đang đợi xử lý";
+            case "paying": return "Đang đợi thanh toán";
+            case "completed": return "Đã hoàn thành";
+            case "denied": return "Đã từ chối";
+            default: return "Không xác định";
+        }
+    }
+
+    private void updateOrderStatus(String status, Long completedDate) {
+        String orderId = "tL5yTg5nE5wh7npTenc9"; // ID mẫu, đổi ở đây theo id order ở trên để cập nhật
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("status", status);
+        if (completedDate != null) {
+            updates.put("completed_date", completedDate);
+        }
+        db.collection("orders").document(orderId).update(updates).addOnSuccessListener(aVoid -> {
+            loadOrderDetails(orderId); // Load lại UI
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Cập nhật trạng thái thất bại!", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void updateButtonState(Button button, boolean isEnabled) {
+        button.setEnabled(isEnabled);
+        if (isEnabled) {
+            button.setBackgroundTintList(getResources().getColorStateList(R.color.green, null)); // Màu xanh
+            button.setTextColor(getResources().getColor(R.color.white, null)); // Chữ màu trắng
+        } else {
+            button.setBackgroundTintList(getResources().getColorStateList(R.color.grey, null)); // Màu xám
+            button.setTextColor(getResources().getColor(R.color.grey_light, null)); // Chữ xám
+        }
     }
 }

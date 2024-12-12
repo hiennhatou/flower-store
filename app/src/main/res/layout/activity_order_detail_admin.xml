@@ -84,9 +84,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Từ chối"
-            android:backgroundTint="#F44336"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"
-            android:layout_marginEnd="16dp" />
+            android:enabled="true" />
 
         <Button
             android:id="@+id/complete_button"
@@ -94,7 +95,9 @@
             android:layout_height="wrap_content"
             android:text="Hoàn thành"
             android:backgroundTint="#4CAF50"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:enabled="true" />
+
     </LinearLayout>
 
 </LinearLayout>
