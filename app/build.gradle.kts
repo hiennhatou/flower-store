@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.lifecycle.common.java8)
     implementation(libs.guava)
     implementation(libs.concurrent.futures)
+    implementation ("com.squareup.picasso:picasso:2.8")
 
     implementation(libs.annotation)
     implementation(libs.flexbox)
