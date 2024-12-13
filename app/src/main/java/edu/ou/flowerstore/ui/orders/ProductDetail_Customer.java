@@ -1,5 +1,6 @@
 package edu.ou.flowerstore.ui.orders;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -57,7 +58,7 @@ public class ProductDetail_Customer extends AppCompatActivity {
         productAdapter = new ProductAdapter(productList, this);
         productRecyclerView.setAdapter(productAdapter);
 
-        loadOrderDetails("tL5yTg5nE5wh7npTenc9"); // ID mẫu trong Firestore, test order khác thì đổi ở đây
+        loadOrderDetails("SEDfZJRBMrqnmaHsQqgs"); // ID mẫu trong Firestore, test order khác thì đổi ở đây
     }
 
     private void loadOrderDetails(String orderId) {
@@ -98,12 +99,14 @@ public class ProductDetail_Customer extends AppCompatActivity {
                 orderStatusTextView.setText("Trạng thái: " + translateStatus(status));
 
                 // kích hoạt/tắt nút dựa trên trạng thái
-                if ("pending".equals(status)) {
+                if ("pending".equals(status) || "paying".equals(status)) {
                     updateButtonState(btn_checkout, true);
-                }
-                else {
+                    btn_checkout.invalidate(); // Làm mới giao diện
+                } else {
                     updateButtonState(btn_checkout, false);
+                    btn_checkout.invalidate(); // Làm mới giao diện
                 }
+
 
                 // Cập nhật danh sách sản phẩm
                 List<Map<String, Object>> products = (List<Map<String, Object>>) orderSnapshot.get("products");
@@ -147,7 +150,7 @@ public class ProductDetail_Customer extends AppCompatActivity {
     }
 
     private void updateOrderStatus(String status, Long completedDate) {
-        String orderId = "tL5yTg5nE5wh7npTenc9"; // ID mẫu, đổi ở đây theo id order ở trên để cập nhật
+        String orderId = "SEDfZJRBMrqnmaHsQqgs"; // ID mẫu, đổi ở đây theo id order ở trên để cập nhật
         Map<String, Object> updates = new HashMap<>();
         updates.put("status", status);
         if (completedDate != null) {
@@ -163,12 +166,12 @@ public class ProductDetail_Customer extends AppCompatActivity {
     private void updateButtonState(Button button, boolean isEnabled) {
         button.setEnabled(isEnabled);
         if (isEnabled) {
-            button.setBackgroundTintList(getResources().getColorStateList(R.color.grey_light, null)); // Màu xam sang
-            button.setTextColor(getResources().getColor(R.color.white, null)); // Chữ màu trắng
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.red, null))); // Màu đỏ
         } else {
-            button.setBackgroundTintList(getResources().getColorStateList(R.color.grey, null)); // Màu xám
-            button.setTextColor(getResources().getColor(R.color.grey_light, null)); // Chữ xám
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.grey, null))); // Màu xám
         }
+
     }
+
 
 }

@@ -56,13 +56,13 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_order_info"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="150dp"
             app:cardCornerRadius="20dp"
             android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="165dp"
                 android:orientation="vertical"
                 android:padding="16dp">
 
@@ -72,14 +72,14 @@
                     android:layout_height="wrap_content"
                     android:text="Mã đơn hàng: OA23RGFEB45"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên khách hàng: Nguyễn Văn A"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_address"
@@ -93,8 +93,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Trạng thái: Đang đợi thanh toán"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/holo_red_dark"/>
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="18sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -146,8 +146,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thực hiện thanh toán"
-                android:textColor="@android:color/white"
-                android:background="@color/colorAccent"/>
+                android:textColor="#FFFFFF"
+                android:enabled="true" />
+
         </LinearLayout>
     </LinearLayout>
 
