@@ -62,14 +62,41 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
     private void loadOrderDetails(String orderId) {
         db.collection("orders").document(orderId).get().addOnSuccessListener(orderSnapshot -> {
             if (orderSnapshot.exists()) {
+                // Cập nhật thông tin mã đơn hàng
                 orderIdTextView.setText("Mã đơn hàng: " + orderId);
-                customerNameTextView.setText("Tên khách hàng: Nguyễn Văn A");
-                shippingAddressTextView.setText("Địa chỉ giao hàng: 1 Quang Trung, P.1, Q.1, TP.HCM");
 
+
+                DocumentReference userRef = (DocumentReference) orderSnapshot.get("user");
+                if (userRef != null) {
+                    userRef.get().addOnSuccessListener(userSnapshot -> {
+                        if (userSnapshot.exists()) {
+                            String customerName = userSnapshot.getString("name");
+                            customerNameTextView.setText("Tên khách hàng: " + customerName);
+                        } else {
+                            customerNameTextView.setText("Tên khách hàng: N/A");
+                        }
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(this, "Không thể tải thông tin khách hàng!", Toast.LENGTH_SHORT).show();
+                    });
+                }
+
+                // Lấy địa chỉ giao hàng
+                Map<String, Object> addressMap = (Map<String, Object>) orderSnapshot.get("address");
+                if (addressMap != null) {
+                    String address = (String) addressMap.get("address");
+                    String city = (String) addressMap.get("city");
+                    String district = (String) addressMap.get("district");
+                    String ward = (String) addressMap.get("ward");
+
+                    String fullAddress = address + ", " + district + ", " + ward + ", " + city;
+                    shippingAddressTextView.setText("Địa chỉ giao hàng: " + fullAddress);
+                }
+
+                // Cập nhật trạng thái đơn hàng
                 String status = orderSnapshot.getString("status");
                 orderStatusTextView.setText("Trạng thái: " + translateStatus(status));
 
-                // Xử lý kích hoạt/tắt nút dựa trên trạng thái
+                // kích hoạt/tắt nút dựa trên trạng thái
                 if ("pending".equals(status)) {
                     updateButtonState(rejectButton, true);
                     updateButtonState(completeButton, true);
@@ -81,6 +108,7 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
                     updateButtonState(completeButton, false);
                 }
 
+                // Cập nhật danh sách sản phẩm
                 List<Map<String, Object>> products = (List<Map<String, Object>>) orderSnapshot.get("products");
                 if (products != null) {
                     AtomicReference<Double> totalPrice = new AtomicReference<>(0.0);
@@ -110,6 +138,7 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
             }
         }).addOnFailureListener(e -> Toast.makeText(this, "Không thể tải thông tin đơn hàng!", Toast.LENGTH_SHORT).show());
     }
+
 
     private String translateStatus(String status) {
         switch (status) {
