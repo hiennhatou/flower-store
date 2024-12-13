@@ -22,8 +22,8 @@ import edu.ou.flowerstore.db.entities.CartEntity;
 import edu.ou.flowerstore.ui.cart.CartItem;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 import edu.ou.flowerstore.utils.zalopay.ZaloPayApi;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+//import retrofit2.Retrofit;
+//import retrofit2.converter.gson.GsonConverterFactory;
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPaySDK;
 

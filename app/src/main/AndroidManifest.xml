@@ -50,13 +50,15 @@
             android:name=".ui.cart.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.orders.OrderDetailAdminActivity"
             android:exported="false" />
         <activity
             android:name=".ui.productdetail.ProductDetailActivity"
             android:exported="false" />
+        <activity android:name=".ui.admin.OrderManagementActivity"
+            android:exported="false"/>
         <activity
-            android:name=".ui.orders.OrderDetailAdminActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

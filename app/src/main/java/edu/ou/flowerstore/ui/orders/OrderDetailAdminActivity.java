@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
@@ -46,15 +48,24 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(this, productList);
         productRecyclerView.setAdapter(productAdapter);
 
-        loadOrderDetails("tL5yTg5nE5wh7npTenc9"); // ID mẫu trong Firestore, test order khác thì đổi ở đây
+        // Nhận orderId từ Intent
+        String orderId = getIntent().getStringExtra("orderId");
+        if (orderId == null || orderId.isEmpty()) {
+            Toast.makeText(this, "Không tìm thấy mã đơn hàng!", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // Load chi tiết đơn hàng
+        loadOrderDetails(orderId);
 
         rejectButton.setOnClickListener(v -> {
-            updateOrderStatus("denied", null);
+            updateOrderStatus(orderId, "denied", null);
             Toast.makeText(this, "Đã từ chối đơn hàng!", Toast.LENGTH_SHORT).show();
         });
 
         completeButton.setOnClickListener(v -> {
-            updateOrderStatus("completed", System.currentTimeMillis());
+            updateOrderStatus(orderId, "completed", System.currentTimeMillis());
             Toast.makeText(this, "Đã hoàn thành đơn hàng!", Toast.LENGTH_SHORT).show();
         });
     }
@@ -62,9 +73,7 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
     private void loadOrderDetails(String orderId) {
         db.collection("orders").document(orderId).get().addOnSuccessListener(orderSnapshot -> {
             if (orderSnapshot.exists()) {
-                // Cập nhật thông tin mã đơn hàng
                 orderIdTextView.setText("Mã đơn hàng: " + orderId);
-
 
                 DocumentReference userRef = (DocumentReference) orderSnapshot.get("user");
                 if (userRef != null) {
@@ -80,7 +89,6 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
                     });
                 }
 
-                // Lấy địa chỉ giao hàng
                 Map<String, Object> addressMap = (Map<String, Object>) orderSnapshot.get("address");
                 if (addressMap != null) {
                     String address = (String) addressMap.get("address");
@@ -92,11 +100,9 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
                     shippingAddressTextView.setText("Địa chỉ giao hàng: " + fullAddress);
                 }
 
-                // Cập nhật trạng thái đơn hàng
                 String status = orderSnapshot.getString("status");
                 orderStatusTextView.setText("Trạng thái: " + translateStatus(status));
 
-                // kích hoạt/tắt nút dựa trên trạng thái
                 if ("pending".equals(status)) {
                     updateButtonState(rejectButton, true);
                     updateButtonState(completeButton, true);
@@ -108,7 +114,6 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
                     updateButtonState(completeButton, false);
                 }
 
-                // Cập nhật danh sách sản phẩm
                 List<Map<String, Object>> products = (List<Map<String, Object>>) orderSnapshot.get("products");
                 if (products != null) {
                     AtomicReference<Double> totalPrice = new AtomicReference<>(0.0);
@@ -139,7 +144,6 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
         }).addOnFailureListener(e -> Toast.makeText(this, "Không thể tải thông tin đơn hàng!", Toast.LENGTH_SHORT).show());
     }
 
-
     private String translateStatus(String status) {
         switch (status) {
             case "pending": return "Đang đợi xử lý";
@@ -150,15 +154,16 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
         }
     }
 
-    private void updateOrderStatus(String status, Long completedDate) {
-        String orderId = "tL5yTg5nE5wh7npTenc9"; // ID mẫu, đổi ở đây theo id order ở trên để cập nhật
+    private void updateOrderStatus(String orderId, String status, Long completedDate) {
         Map<String, Object> updates = new HashMap<>();
         updates.put("status", status);
+
         if (completedDate != null) {
-            updates.put("completed_date", completedDate);
+            updates.put("completed_date", new Timestamp(new java.util.Date(completedDate))); // Chuyển đổi sang Timestamp
         }
+
         db.collection("orders").document(orderId).update(updates).addOnSuccessListener(aVoid -> {
-            loadOrderDetails(orderId); // Load lại UI
+            loadOrderDetails(orderId); // Load lại UI sau khi cập nhật
         }).addOnFailureListener(e -> {
             Toast.makeText(this, "Cập nhật trạng thái thất bại!", Toast.LENGTH_SHORT).show();
         });
@@ -167,11 +172,11 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
     private void updateButtonState(Button button, boolean isEnabled) {
         button.setEnabled(isEnabled);
         if (isEnabled) {
-            button.setBackgroundTintList(getResources().getColorStateList(R.color.green, null)); // Màu xanh
-            button.setTextColor(getResources().getColor(R.color.white, null)); // Chữ màu trắng
+            button.setBackgroundTintList(getResources().getColorStateList(R.color.green, null));
+            button.setTextColor(getResources().getColor(R.color.white, null));
         } else {
-            button.setBackgroundTintList(getResources().getColorStateList(R.color.grey, null)); // Màu xám
-            button.setTextColor(getResources().getColor(R.color.grey_light, null)); // Chữ xám
+            button.setBackgroundTintList(getResources().getColorStateList(R.color.grey, null));
+            button.setTextColor(getResources().getColor(R.color.grey_light, null));
         }
     }
 }
