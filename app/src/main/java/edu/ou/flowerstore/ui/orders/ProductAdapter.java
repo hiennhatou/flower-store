@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import edu.ou.flowerstore.R;
@@ -36,9 +37,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText(product.getPrice());
+
+        // Định dạng giá sản phẩm
+        double productPrice = Double.parseDouble(product.getPrice());
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedPrice = decimalFormat.format(productPrice) + " đ"; // Thêm đơn vị VND
+
+        holder.productPrice.setText(formattedPrice); // Gán giá đã định dạng vào TextView
+
         holder.productQuantity.setText("Số lượng: " + product.getQuantity());
 
+        // Hiển thị hình ảnh
         if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) {
             Picasso.get()
                     .load(product.getImageUrl())
@@ -49,6 +58,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             holder.productImage.setImageResource(R.drawable.ic_placeholder);
         }
     }
+
 
     @Override
     public int getItemCount() {

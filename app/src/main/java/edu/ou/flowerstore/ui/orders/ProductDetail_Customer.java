@@ -58,7 +58,7 @@ public class ProductDetail_Customer extends AppCompatActivity {
         productAdapter = new ProductAdapter(productList, this);
         productRecyclerView.setAdapter(productAdapter);
 
-        loadOrderDetails("SEDfZJRBMrqnmaHsQqgs"); // ID mẫu trong Firestore, test order khác thì đổi ở đây
+        loadOrderDetails("zqNPUGjkJ5EtGRvUvBvc"); // ID mẫu trong Firestore, test order khác thì đổi ở đây
     }
 
     private void loadOrderDetails(String orderId) {
@@ -127,7 +127,7 @@ public class ProductDetail_Customer extends AppCompatActivity {
                                 productList.add(new Product(quantity, productImage, String.valueOf(productPrice), productName));
                                 productAdapter.notifyDataSetChanged();
 
-                                totalPriceTextView.setText("Tổng tiền: " + String.format("%,.0f", totalPrice.get()) + " đ");
+                                totalPriceTextView.setText("Tổng tiền: \n" + String.format("%,.0f", totalPrice.get()) + " đ");
                             }
                         }).addOnFailureListener(e -> {
                             Toast.makeText(this, "Không thể tải thông tin sản phẩm!", Toast.LENGTH_SHORT).show();
@@ -150,7 +150,7 @@ public class ProductDetail_Customer extends AppCompatActivity {
     }
 
     private void updateOrderStatus(String status, Long completedDate) {
-        String orderId = "SEDfZJRBMrqnmaHsQqgs"; // ID mẫu, đổi ở đây theo id order ở trên để cập nhật
+        String orderId = "zqNPUGjkJ5EtGRvUvBvc"; // ID mẫu, đổi ở đây theo id order ở trên để cập nhật
         Map<String, Object> updates = new HashMap<>();
         updates.put("status", status);
         if (completedDate != null) {

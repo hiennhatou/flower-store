@@ -55,14 +55,14 @@
         <!-- Order Information -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_order_info"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="20dp"
             android:layout_marginBottom="16dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="165dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mã đơn hàng: OA23RGFEB45"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -79,14 +79,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên khách hàng: Nguyễn Văn A"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/txt_address"
                     android:layout_width="346dp"
                     android:layout_height="wrap_content"
                     android:text="Địa chỉ: 1 Quang Trung, P.1, Q.1, TP.HCM"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/txt_status"
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:text="Trạng thái: Đang đợi thanh toán"
                     android:textColor="@android:color/holo_red_dark"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -119,15 +119,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <!-- Total Text -->
-                <TextView
-                    android:id="@+id/txt_total_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tổng cộng:"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
 
                 <!-- Total Price -->
                 <TextView
