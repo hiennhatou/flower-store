@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.Query;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -55,7 +56,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
             finish();
         });
         if (user == null) finish();
-        appFirebase.getOrdersCollection().whereEqualTo("user", appFirebase.getUsersCollection().document(user.getUid())).get()
+        appFirebase.getOrdersCollection().whereEqualTo("user", appFirebase.getUsersCollection().document(user.getUid())).orderBy("created_date", Query.Direction.DESCENDING).get()
                 .addOnCompleteListener(task -> {
                     customerOrderOverviewList.clear();
                     if (task.isSuccessful()) {
