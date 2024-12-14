@@ -52,6 +52,9 @@
             android:name=".ui.productdetail.ProductDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.category.CategoryManagementActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>

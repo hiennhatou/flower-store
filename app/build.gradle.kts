@@ -62,7 +62,8 @@ dependencies {
     implementation(libs.lifecycle.common.java8)
     implementation(libs.guava)
     implementation(libs.concurrent.futures)
-
+    implementation("com.google.firebase:firebase-database:20.2.2")
+    implementation ("com.google.firebase:firebase-firestore:23.0.4")
     implementation(libs.annotation)
     implementation(libs.flexbox)
     implementation(libs.appcompat)
