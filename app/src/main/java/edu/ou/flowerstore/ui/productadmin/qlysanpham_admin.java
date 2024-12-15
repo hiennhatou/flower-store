@@ -27,10 +27,15 @@ public class QlySanPhamAdminActivity extends AppCompatActivity {
 
         products = new ArrayList<>();
         adapter = new ProductAdapter(products, this, new ProductAdapter.OnProductItemClickListener() { // Thêm listener
-            @Override
+
             public void onUpdateProduct(Product product) {
                 // Xử lý cập nhật sản phẩm
                 Toast.makeText(QlySanPhamAdminActivity.this, "Cập nhật sản phẩm: " + product.getTenSP(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onEditProduct(Product product) {
+
             }
 
             @Override
