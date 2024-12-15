@@ -38,14 +38,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = products.get(position);
 
         // Gán dữ liệu vào giao diện
-        holder.binding.tvProductName.setText(product.getTenSP());
-        holder.binding.tvProductPrice.setText(String.valueOf(product.getGia()));
-        holder.binding.tvProductQuantity.setText(String.valueOf(product.getSoLuong()));
+        holder.binding.tvTenSP.setText(product.getTenSP());
+        holder.binding.tvMoTa.setText(String.valueOf(product.getGia()));
+        holder.binding.tvGia.setText(String.valueOf(product.getSoLuong()));
 
         // Xử lý sự kiện click vào optionsMenu
-        holder.binding.ivOptionsMenu.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(context, holder.binding.ivOptionsMenu);
-            popup.getMenuInflater().inflate(R.menu.product_options_menu, popup.getMenu());
+        holder.binding.imgMenu.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(context, holder.binding.imgMenu);
+            popup.getMenuInflater().inflate(R.menu.bottom_nav_sua_xoa, popup.getMenu());
 
             popup.setOnMenuItemClickListener(item -> {
                 int itemId = item.getItemId();
