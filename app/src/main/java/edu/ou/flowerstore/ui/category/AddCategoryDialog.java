@@ -42,15 +42,20 @@ public class AddCategoryDialog extends Dialog {
             Map<String, Object> categoryData = new HashMap<>();
             categoryData.put("name", name);
             categoryData.put("status", true);
-            // categoryData.put("thumbnail", ""); // Bỏ qua trường thumbnail, thêm sau
 
+            // Thêm danh mục vào Firestore
             FirebaseFirestore.getInstance().collection("categories")
                     .document(code)  // Sử dụng code làm document_id
                     .set(categoryData)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(getContext(), "Thêm danh mục thành công!", Toast.LENGTH_SHORT).show();
-                            dismiss(); // Chỉ đóng dialog, không gọi listener
+                            dismiss();
+
+
+                            if (listener != null) {
+                                listener.onCategoryAdded(new Category(code, name, true));
+                            }
                         } else {
                             Toast.makeText(getContext(), "Thêm danh mục thất bại!", Toast.LENGTH_SHORT).show();
                         }

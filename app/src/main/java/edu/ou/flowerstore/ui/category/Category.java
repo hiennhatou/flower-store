@@ -1,21 +1,21 @@
 package edu.ou.flowerstore.ui.category;
 
 public class Category {
-    private String code; // Thêm trường code
+    private String code;  // Mã danh mục, sử dụng làm ID của tài liệu Firestore
     private String name;
     private boolean status;
 
     public Category() {
-        // Default constructor for Firestore
+        // Constructor mặc định cho Firestore
     }
 
-    public Category(String code, String name, boolean status) { // Cập nhật constructor
+    public Category(String code, String name, boolean status) {
         this.code = code;
         this.name = name;
         this.status = status;
     }
 
-    // Getters and setters
+
     public String getCode() {
         return code;
     }

@@ -15,9 +15,9 @@ import edu.ou.flowerstore.databinding.ItemCategoryAdminBinding;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
     private final List<Category> categories;
     private final Context context;
-    private OnCategoryItemClickListener listener; // Thêm listener
+    private OnCategoryItemClickListener listener;
 
-    public CategoryAdapter(List<Category> categories, Context context, OnCategoryItemClickListener listener) { // Cập nhật constructor
+    public CategoryAdapter(List<Category> categories, Context context, OnCategoryItemClickListener listener) {
         this.categories = categories;
         this.context = context;
         this.listener = listener;
@@ -35,15 +35,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categories.get(position);
         holder.binding.categoryName.setText(category.getName());
 
-        holder.binding.optionsMenu.setOnClickListener(v -> { // Xử lý sự kiện click vào ImageView
+        holder.binding.optionsMenu.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(context, holder.binding.optionsMenu);
             popup.getMenuInflater().inflate(R.menu.category_options_menu, popup.getMenu());
             popup.setOnMenuItemClickListener(item -> {
                 int itemId = item.getItemId();
                 if (itemId == R.id.action_update) {
-                    listener.onUpdateCategory(category); // Gọi listener cho cập nhật
+                    listener.onUpdateCategory(category);
                 } else if (itemId == R.id.action_delete) {
-                    listener.onDeleteCategory(category); // Gọi listener cho xóa
+                    listener.onDeleteCategory(category, position);
                 }
                 return true;
             });
@@ -65,8 +65,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
     }
 
-    public interface OnCategoryItemClickListener { // Interface cho listener
+    public interface OnCategoryItemClickListener {
         void onUpdateCategory(Category category);
-        void onDeleteCategory(Category category);
+        void onDeleteCategory(Category category, int position); // Cập nhật listener để nhận thêm vị trí
     }
 }
