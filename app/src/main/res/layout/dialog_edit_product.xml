@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- Binding product data object if needed -->
+        <!-- Binding product data object -->
         <variable
             name="product"
             type="edu.ou.flowerstore.ui.productadmin.Product" />
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <!-- Mã sản phẩm -->
         <EditText
             android:id="@+id/etMaSanPham"
             android:layout_width="0dp"
@@ -24,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{product.maSanPham}" />
 
+        <!-- Tên sản phẩm -->
         <EditText
             android:id="@+id/etTenSP"
             android:layout_width="0dp"
@@ -34,6 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{product.tenSP}" />
 
+        <!-- Số lượng -->
         <EditText
             android:id="@+id/etSoLuong"
             android:layout_width="0dp"
@@ -44,6 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{String.valueOf(product.soLuong)}" />
 
+        <!-- Mô tả sản phẩm -->
         <EditText
             android:id="@+id/etMoTa"
             android:layout_width="0dp"
@@ -54,6 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{product.moTa}" />
 
+        <!-- Giá sản phẩm -->
         <EditText
             android:id="@+id/etGia"
             android:layout_width="0dp"
@@ -64,6 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{String.valueOf(product.gia)}" />
 
+        <!-- URL hình ảnh -->
         <EditText
             android:id="@+id/etHinhAnh"
             android:layout_width="0dp"
@@ -74,6 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{product.hinhAnh}" />
 
+        <!-- Mã loại hoa -->
         <EditText
             android:id="@+id/etMaLoaiHoa"
             android:layout_width="0dp"
@@ -84,6 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{product.maLoai}" />
 
+        <!-- Buttons Layout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnLayout"
             android:layout_width="0dp"
@@ -92,6 +100,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <!-- Button Lưu -->
             <Button
                 android:id="@+id/btnLuu"
                 android:layout_width="0dp"
@@ -101,6 +110,7 @@
                 app:layout_constraintEnd_toStartOf="@id/btnHuy"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Button Hủy -->
             <Button
                 android:id="@+id/btnHuy"
                 android:layout_width="0dp"
