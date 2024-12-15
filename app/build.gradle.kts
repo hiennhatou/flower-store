@@ -45,9 +45,6 @@ dependencies {
     implementation(libs.room.guava)
     implementation(libs.picasso)
     implementation(libs.mpandroidchart)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.volley)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)

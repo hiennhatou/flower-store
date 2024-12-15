@@ -1,6 +1,5 @@
 package edu.ou.flowerstore.ui.cart;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +17,6 @@ import java.util.Locale;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityCartBinding;
-import edu.ou.flowerstore.ui.makeorder.MakeOrderActivity;
 
 public class CartActivity extends AppCompatActivity {
     static NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "vn"));
@@ -49,15 +47,8 @@ public class CartActivity extends AppCompatActivity {
         viewModel.getCartItemsLiveData().observe(this, data -> {
             cartAdapter.setCartItems(data);
             cartAdapter.notifyDataSetChanged();
-            if (data != null && data.size() > 0)
-                binding.btnProceedToCheckout.setEnabled(true);
-            else
-                binding.btnProceedToCheckout.setEnabled(false);
             long totalPrice = data.stream().map(cart -> cart.getQuantity() * cart.getPrice()).reduce(0L, Long::sum);
             binding.tvTotalCost.setText(currencyFormat.format(totalPrice));
-        });
-        binding.btnProceedToCheckout.setOnClickListener(v -> {
-            startActivity(new Intent(CartActivity.this, MakeOrderActivity.class));
         });
     }
 }

@@ -1,9 +1,7 @@
 package edu.ou.flowerstore.ui.authen;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,14 +27,12 @@ public class Login extends AppCompatActivity {
     private Button btnDangnhap, backBtn;
     private TextInputEditText etEmail, etPassword;
     private FirebaseAuth mAuth;
-    private TextView tvSignUp;
 
     private void AnhXa() {
         btnDangnhap = findViewById(R.id.btnSignIn);
         etEmail = findViewById(R.id.edtEmail);
         etPassword = findViewById(R.id.edtPassword);
         backBtn = findViewById(R.id.iv_back);
-        tvSignUp = findViewById(R.id.tvSignUp);
     }
 
     @Override
@@ -56,10 +52,6 @@ public class Login extends AppCompatActivity {
             Dangnhap();
         });
         backBtn.setOnClickListener(v -> {
-            finish();
-        });
-        tvSignUp.setOnClickListener(v -> {
-            startActivity(new Intent(Login.this, SignUp.class));
             finish();
         });
     }

@@ -8,12 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldValue;
@@ -30,8 +28,6 @@ public class SignUp extends AppCompatActivity {
     EditText edtEmail, edtPassword, etName;
     private AppFirebase appFirebase = new AppFirebase();
     private final FlowerStoreApplication application = FlowerStoreApplication.getInstance();
-    private MutableLiveData<Boolean> isProgressing = new MutableLiveData<>(false);
-    private AlertDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +41,14 @@ public class SignUp extends AppCompatActivity {
         });
         AnhXa();
 
-        loadingDialog = new AlertDialog.Builder(this).setView(getLayoutInflater().inflate(R.layout.dialog_loading, null)).create();
-
         btnSignup.setOnClickListener(v -> {
             onSignUp();
         });
 
-        isProgressing.observe(this, v -> {
-            if (v) {
-                loadingDialog.show();
-            } else {
-                loadingDialog.cancel();
-            }
-        });
-
         TextView tvSignInLink = findViewById(R.id.tvSignInLink);
         tvSignInLink.setOnClickListener(v -> {
-            startActivity(new Intent(SignUp.this, Login.class));
+            Intent intent = new Intent(SignUp.this, Login.class);
+            startActivity(intent);
             finish();
         });
         backBtn.setOnClickListener(v -> {
@@ -70,26 +57,22 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void onSignUp() {
-        isProgressing.setValue(true);
-        String email = edtEmail.getText().toString().trim();
+        String email = edtEmail.getText().toString();
         String password = edtPassword.getText().toString();
-        String name = etName.getText().toString().trim();
+        String name = etName.getText().toString();
 
         if (email.isEmpty() || password.isEmpty()) {
-            isProgressing.setValue(false);
             Toast.makeText(SignUp.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (password.length() < 6) {
-            isProgressing.setValue(false);
             Toast.makeText(SignUp.this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (name.isEmpty()) {
-            isProgressing.setValue(false);
-            Toast.makeText(SignUp.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUp.this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -114,11 +97,9 @@ public class SignUp extends AppCompatActivity {
                             } else {
                                 Toast.makeText(SignUp.this, "Lỗi!!!", Toast.LENGTH_SHORT).show();
                             }
-                            isProgressing.setValue(false);
-                            finish();
                         });
+                        finish();
                     } else {
-                        isProgressing.setValue(false);
                         Toast.makeText(SignUp.this, "Lỗi!!!", Toast.LENGTH_SHORT).show();
                     }
                 });

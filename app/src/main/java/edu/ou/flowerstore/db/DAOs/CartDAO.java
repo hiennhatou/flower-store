@@ -36,9 +36,6 @@ public interface CartDAO {
     @Delete
     void delete(CartEntity cart);
 
-    @Query("delete from carts")
-    void deleteAll();
-
     @Update
     void updateCart(CartEntity cart);
 
