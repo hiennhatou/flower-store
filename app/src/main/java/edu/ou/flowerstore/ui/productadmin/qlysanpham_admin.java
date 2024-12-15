@@ -30,19 +30,20 @@ public class QlySanPhamAdminActivity extends AppCompatActivity {
             @Override
             public void onUpdateProduct(Product product) {
                 // Xử lý cập nhật sản phẩm
-                Toast.makeText(QlySanPhamAdminActivity.this, "Cập nhật sản phẩm: " + product.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(QlySanPhamAdminActivity.this, "Cập nhật sản phẩm: " + product.getTenSP(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDeleteProduct(Product product) {
                 // Xử lý xóa sản phẩm
-                Toast.makeText(QlySanPhamAdminActivity.this, "Xóa sản phẩm: " + product.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(QlySanPhamAdminActivity.this, "Xóa sản phẩm: " + product.getTenSP(), Toast.LENGTH_SHORT).show();
                 deleteProduct(product);
             }
         });
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
 
+        // Ensure binding is correct for the button
         binding.addProductBtn.setOnClickListener(v -> {
             AddProductDialog dialog = new AddProductDialog(this, product -> {
                 FirebaseFirestore.getInstance().collection("products")
@@ -89,7 +90,7 @@ public class QlySanPhamAdminActivity extends AppCompatActivity {
 
     private void deleteProduct(Product product) {
         FirebaseFirestore.getInstance().collection("products")
-                .document(product.getId())
+                .document(product.getMaSanPham())
                 .delete()
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Sản phẩm đã được xóa!", Toast.LENGTH_SHORT).show();
