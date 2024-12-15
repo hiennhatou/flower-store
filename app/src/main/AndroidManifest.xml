@@ -20,6 +20,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_application_id" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.orders.CustomerOrderDetailActivity"
             android:exported="false"/>
         <activity
@@ -81,8 +82,16 @@
             android:exported="false" />
         <activity
             android:taskAffinity="edu.ou.littleflower"
+            android:name=".ui.orders.OrderDetailAdminActivity"
+            android:exported="false" />
+        <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.productdetail.ProductDetailActivity"
             android:exported="false" />
+        <activity
+            android:taskAffinity="edu.ou.littleflower"
+            android:name=".ui.admin.OrderManagementActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
