@@ -14,16 +14,9 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -33,16 +26,8 @@ import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.databinding.ActivityMakeOrderBinding;
 import edu.ou.flowerstore.ui.authen.Login;
 import edu.ou.flowerstore.ui.cart.CartItem;
-import edu.ou.flowerstore.utils.MACGenerator;
+import edu.ou.flowerstore.ui.payment.ZaloPayPaymentActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
-import edu.ou.flowerstore.utils.zalopay.RequestCreateZalopayOrderBody;
-import edu.ou.flowerstore.utils.zalopay.ResponseCreateZalopayOrderBody;
-import edu.ou.flowerstore.utils.zalopay.ZaloPayApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MakeOrderActivity extends AppCompatActivity {
     private ActivityMakeOrderBinding binding;
@@ -72,7 +57,6 @@ public class MakeOrderActivity extends AppCompatActivity {
         cart = application.getCartItemsLiveData();
         appFirebase = application.getAppFirebase();
         if (application.getCurrentUserLiveData().getValue() == null) {
-            Toast.makeText(this, "Đăng nhập để hoàn thành đơn đặt hàng nhe!", Toast.LENGTH_LONG).show();
             startActivity(new Intent(MakeOrderActivity.this, Login.class));
             finish();
         }
@@ -189,8 +173,11 @@ public class MakeOrderActivity extends AppCompatActivity {
         order.put("products", orderProducts);
         appFirebase.getOrdersCollection().add(order).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                Intent intent = new Intent(MakeOrderActivity.this, ZaloPayPaymentActivity.class);
+                intent.putExtra("orderId", task.getResult().getId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
                 application.getRoomDB().cartDAO().deleteAll();
-                Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 Toast.makeText(this, "Lỗi!", Toast.LENGTH_LONG).show();
