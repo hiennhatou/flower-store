@@ -1,0 +1,114 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <!-- Binding product data object if needed -->
+        <variable
+            name="product"
+            type="edu.ou.flowerstore.ui.productadmin.Product" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/etMaSanPham"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Mã sản phẩm"
+            android:enabled="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{product.maSanPham}" />
+
+        <EditText
+            android:id="@+id/etTenSP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Tên sản phẩm"
+            app:layout_constraintTop_toBottomOf="@id/etMaSanPham"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{product.tenSP}" />
+
+        <EditText
+            android:id="@+id/etSoLuong"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Số lượng"
+            app:layout_constraintTop_toBottomOf="@id/etTenSP"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{String.valueOf(product.soLuong)}" />
+
+        <EditText
+            android:id="@+id/etMoTa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Mô tả sản phẩm"
+            app:layout_constraintTop_toBottomOf="@id/etSoLuong"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{product.moTa}" />
+
+        <EditText
+            android:id="@+id/etGia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Giá sản phẩm"
+            app:layout_constraintTop_toBottomOf="@id/etMoTa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{String.valueOf(product.gia)}" />
+
+        <EditText
+            android:id="@+id/etHinhAnh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="URL hình ảnh"
+            app:layout_constraintTop_toBottomOf="@id/etGia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{product.hinhAnh}" />
+
+        <EditText
+            android:id="@+id/etMaLoaiHoa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Mã loại hoa"
+            app:layout_constraintTop_toBottomOf="@id/etHinhAnh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{product.maLoai}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/etMaLoaiHoa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/btnLuu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Lưu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnHuy"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnHuy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Hủy"
+                app:layout_constraintStart_toEndOf="@id/btnLuu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

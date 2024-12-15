@@ -7,38 +7,105 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/categoryCode"
+        android:id="@+id/etMaSanPham"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Mã danh mục"
+        android:hint="Mã sản phẩm"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/categoryName"
+        android:id="@+id/etTenSP"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Tên danh mục"
-        app:layout_constraintTop_toBottomOf="@id/categoryCode"
+        android:hint="Tên sản phẩm"
+        app:layout_constraintTop_toBottomOf="@id/etMaSanPham"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etSoLuong"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Số lượng"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/etTenSP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etGia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Giá"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/etSoLuong"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etHinhAnh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="URL hình ảnh"
+        app:layout_constraintTop_toBottomOf="@id/etGia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etMoTa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả"
+        app:layout_constraintTop_toBottomOf="@id/etHinhAnh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etMaLoaiHoa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Mã loại hoa"
+        app:layout_constraintTop_toBottomOf="@id/etMoTa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/btnChonHinhAnh"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Thêm"
-        app:layout_constraintTop_toBottomOf="@id/categoryName"
+        android:text="Chọn Hình Ảnh"
+        app:layout_constraintTop_toBottomOf="@id/etMaLoaiHoa"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/cancelButton" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/cancelButton"
+    <!-- ConstraintLayout con để chứa 2 nút "Thêm" và "Hủy" nằm ngang -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hủy"
-        app:layout_constraintTop_toBottomOf="@id/categoryName"
-        app:layout_constraintStart_toEndOf="@id/addButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnChonHinhAnh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnThem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Thêm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnHuy"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnHuy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            app:layout_constraintStart_toEndOf="@id/btnThem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
