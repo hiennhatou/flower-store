@@ -26,6 +26,7 @@ import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityProductDetailBinding;
 import edu.ou.flowerstore.db.RoomDB;
+import edu.ou.flowerstore.ui.cart.AddCartDialog;
 import edu.ou.flowerstore.ui.cart.CartActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
@@ -55,6 +56,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
         binding.cartBtn.setOnClickListener(v -> {
             Intent cartIntent = new Intent(this, CartActivity.class);
+            cartIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(cartIntent);
         });
         fetchProduct();
@@ -93,6 +95,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             binding.productPrice.setText(currencyFormat.format(price));
             binding.addCartBtn.setOnClickListener(v -> {
                 roomDB.cartDAO().increaseProductInCart(snapshot.getId());
+                AddCartDialog dialog = new AddCartDialog();
+                dialog.show(getSupportFragmentManager(), AddCartDialog.TAG);
             });
             Picasso.get().load(images.get(0)).into(binding.productImg);
         }).addOnFailureListener(command -> {

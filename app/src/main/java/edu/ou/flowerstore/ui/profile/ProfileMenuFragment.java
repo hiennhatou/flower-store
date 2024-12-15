@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,11 +17,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
 import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.ui.admin.AdminActivity;
 import edu.ou.flowerstore.ui.cart.CartActivity;
 import edu.ou.flowerstore.ui.orders.CustomerOrdersActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
@@ -59,6 +62,7 @@ public class ProfileMenuFragment extends Fragment {
         LinearLayout cartBtn = view.findViewById(R.id.cart_btn);
         LinearLayout logoutBtn = view.findViewById(R.id.log_out_button);
         LinearLayout orderBtn = view.findViewById(R.id.order_btn);
+        Button adminBtn = view.findViewById(R.id.admin_btn);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_logout_confirmation, null);
@@ -85,6 +89,18 @@ public class ProfileMenuFragment extends Fragment {
         logoutBtn.setOnClickListener(v -> {
             alertDialog.show();
         });
+        adminBtn.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), AdminActivity.class));
+        });
+        if (appFirebase.getFirebaseAuth().getCurrentUser() != null)
+            appFirebase.getUsersCollection().document(appFirebase.getFirebaseAuth().getCurrentUser().getUid()).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot doc = task.getResult();
+                            if (doc.getString("role") != null && doc.getString("role").equals("admin"))
+                                adminBtn.setVisibility(View.VISIBLE);
+                        }
+                    });
     }
 
     private void initData() {

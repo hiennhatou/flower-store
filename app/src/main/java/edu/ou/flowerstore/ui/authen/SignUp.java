@@ -61,8 +61,7 @@ public class SignUp extends AppCompatActivity {
 
         TextView tvSignInLink = findViewById(R.id.tvSignInLink);
         tvSignInLink.setOnClickListener(v -> {
-            Intent intent = new Intent(SignUp.this, Login.class);
-            startActivity(intent);
+            startActivity(new Intent(SignUp.this, Login.class));
             finish();
         });
         backBtn.setOnClickListener(v -> {

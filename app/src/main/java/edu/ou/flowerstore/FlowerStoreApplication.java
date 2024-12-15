@@ -2,6 +2,7 @@ package edu.ou.flowerstore;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -21,6 +22,11 @@ import edu.ou.flowerstore.db.RoomDB;
 import edu.ou.flowerstore.db.entities.CartEntity;
 import edu.ou.flowerstore.ui.cart.CartItem;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
+import edu.ou.flowerstore.utils.zalopay.ZaloPayApi;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import vn.zalopay.sdk.Environment;
+import vn.zalopay.sdk.ZaloPaySDK;
 
 public class FlowerStoreApplication extends Application {
     static private FlowerStoreApplication instance;
@@ -36,12 +42,13 @@ public class FlowerStoreApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ZaloPaySDK.init(2554, Environment.SANDBOX);
         FlowerStoreApplication.instance = this;
         appFirebase = new AppFirebase();
         currentUserLiveData.setValue(appFirebase.getFirebaseAuth().getCurrentUser());
-
         roomDB = Room.databaseBuilder(this.getApplicationContext(), RoomDB.class, "littleflower").allowMainThreadQueries().build();
         cartEntitiesLiveData = roomDB.cartDAO().getAllInCart();
+
         cartEntitiesLiveData.observeForever(data -> {
             List<CartItem> cartItems = new ArrayList<>();
             List<String> productsId = data.stream().map(CartEntity::getProduct_id).collect(Collectors.toList());
