@@ -1,5 +1,6 @@
 package edu.ou.flowerstore.ui.orders;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,11 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
         holder.dateTx.setText(order.date);
         holder.orderId.setText(String.format("Mã: %s", order.id));
         holder.stateTx.setText(getOrderStateText(order.state));
+        holder.view.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.view.getContext(), CustomerOrderDetailActivity.class);
+            intent.putExtra("order_id", order.id);
+            holder.view.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -60,6 +66,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTx, priceTx, dateTx, stateTx, orderId;
+        View view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +75,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
             dateTx = itemView.findViewById(R.id.date_tx);
             stateTx = itemView.findViewById(R.id.state_tx);
             orderId = itemView.findViewById(R.id.order_id);
+            view = itemView;
         }
     }
 

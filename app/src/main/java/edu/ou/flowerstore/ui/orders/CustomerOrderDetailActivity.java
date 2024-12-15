@@ -1,8 +1,9 @@
 package edu.ou.flowerstore.ui.orders;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +27,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import edu.ou.flowerstore.R;
 
-public class ProductDetail_Customer extends AppCompatActivity {
+public class CustomerOrderDetailActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
 
     private TextView orderIdTextView, customerNameTextView, shippingAddressTextView, totalPriceTextView, orderStatusTextView;
-    private Button btn_checkout;
+    private Button btn_checkout, backBtn;
     private RecyclerView productRecyclerView;
     private ProductAdapter productAdapter;
     private List<Product> productList;
@@ -42,6 +43,16 @@ public class ProductDetail_Customer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail_customer);
+        EdgeToEdge.enable(this);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        Intent intent = getIntent();
+        if (intent == null) finish();
+        String id = intent.getStringExtra("order_id");
+        if (id == null) finish();
 
         db = FirebaseFirestore.getInstance();
 
@@ -51,6 +62,7 @@ public class ProductDetail_Customer extends AppCompatActivity {
         totalPriceTextView = findViewById(R.id.txt_total_price);
         orderStatusTextView = findViewById(R.id.txt_status);
         btn_checkout = findViewById(R.id.btn_checkout);
+        backBtn = findViewById(R.id.ivBack);
 
         productRecyclerView = findViewById(R.id.product_list);
         productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -58,7 +70,10 @@ public class ProductDetail_Customer extends AppCompatActivity {
         productAdapter = new ProductAdapter(productList, this);
         productRecyclerView.setAdapter(productAdapter);
 
-        loadOrderDetails("zqNPUGjkJ5EtGRvUvBvc"); // ID mẫu trong Firestore, test order khác thì đổi ở đây
+        backBtn.setOnClickListener(v -> {
+            finish();
+        });
+        loadOrderDetails(id); // ID mẫu trong Firestore, test order khác thì đổi ở đây
     }
 
     private void loadOrderDetails(String orderId) {
@@ -99,12 +114,10 @@ public class ProductDetail_Customer extends AppCompatActivity {
                 orderStatusTextView.setText("Trạng thái: " + translateStatus(status));
 
                 // kích hoạt/tắt nút dựa trên trạng thái
-                if ("pending".equals(status) || "paying".equals(status)) {
+                if ("paying".equals(status)) {
                     updateButtonState(btn_checkout, true);
-                    btn_checkout.invalidate(); // Làm mới giao diện
                 } else {
                     updateButtonState(btn_checkout, false);
-                    btn_checkout.invalidate(); // Làm mới giao diện
                 }
 
 
@@ -141,7 +154,7 @@ public class ProductDetail_Customer extends AppCompatActivity {
 
     private String translateStatus(String status) {
         switch (status) {
-            case "pending": return "Đang đợi xử lý";
+            case "pending": return "Đang xử lý đơn hàng";
             case "paying": return "Đang đợi thanh toán";
             case "completed": return "Đã hoàn thành";
             case "denied": return "Đã từ chối";
@@ -149,29 +162,8 @@ public class ProductDetail_Customer extends AppCompatActivity {
         }
     }
 
-    private void updateOrderStatus(String status, Long completedDate) {
-        String orderId = "zqNPUGjkJ5EtGRvUvBvc"; // ID mẫu, đổi ở đây theo id order ở trên để cập nhật
-        Map<String, Object> updates = new HashMap<>();
-        updates.put("status", status);
-        if (completedDate != null) {
-            updates.put("completed_date", completedDate);
-        }
-        db.collection("orders").document(orderId).update(updates).addOnSuccessListener(aVoid -> {
-            loadOrderDetails(orderId); // Load lại UI
-        }).addOnFailureListener(e -> {
-            Toast.makeText(this, "Cập nhật trạng thái thất bại!", Toast.LENGTH_SHORT).show();
-        });
-    }
-
     private void updateButtonState(Button button, boolean isEnabled) {
         button.setEnabled(isEnabled);
-        if (isEnabled) {
-            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.red, null))); // Màu đỏ
-        } else {
-            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.grey, null))); // Màu xám
-        }
-
+        button.setBackgroundColor(Color.parseColor(isEnabled ? "#0050e7" : "#FFF9F1F0"));
     }
-
-
 }

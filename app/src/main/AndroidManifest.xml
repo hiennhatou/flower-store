@@ -16,17 +16,16 @@
         android:theme="@style/Theme.FlowerStore"
         tools:ignore="ExtraText"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="false" />
+        <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/facebook_application_id" />
+
         <activity
             android:name=".ui.orders.CustomerOrdersActivity"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_application_id" />
-
+        <activity
+            android:name=".ui.orders.CustomerOrderDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.authen.Login"
             android:exported="false"
@@ -49,7 +48,7 @@
             android:name=".ui.productdetail.ProductDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.orders.ProductDetail_Customer"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
