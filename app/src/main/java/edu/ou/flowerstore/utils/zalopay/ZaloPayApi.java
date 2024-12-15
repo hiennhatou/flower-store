@@ -8,4 +8,7 @@ import retrofit2.http.POST;
 public interface ZaloPayApi {
     @POST("/v2/create")
     Call<ResponseCreateZalopayOrderBody> createOrder(@Body RequestCreateZalopayOrderBody body);
+
+    @POST("/v2/query")
+    Call<ResponseCreateZalopayOrderBody> queryTransStatus(@Body RequestQueryTransStatus body);
 }

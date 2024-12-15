@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,9 +78,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            productNameTx = itemView.findViewById(R.id.tvProductName);
-            priceTx = itemView.findViewById(R.id.tvProductPrice);
-            imgView = itemView.findViewById(R.id.ivProductImage);
+            productNameTx = itemView.findViewById(R.id.product_name);
+            priceTx = itemView.findViewById(R.id.product_price);
+            imgView = itemView.findViewById(R.id.product_img);
             quantityTx = itemView.findViewById(R.id.tvQuantity);
             incrementBtn = itemView.findViewById(R.id.btnIncreaseQuantity);
             decrementBtn = itemView.findViewById(R.id.btnDecreaseQuantity);

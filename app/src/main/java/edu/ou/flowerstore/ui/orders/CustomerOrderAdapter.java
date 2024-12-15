@@ -1,6 +1,6 @@
 package edu.ou.flowerstore.ui.orders;
 
-import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +14,17 @@ import java.util.List;
 import edu.ou.flowerstore.R;
 
 public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdapter.ViewHolder> {
-    private Context context;
+
     private final List<CustomerOrderOverview> customerOrderOverviewList;
 
     public CustomerOrderAdapter(List<CustomerOrderOverview> list) {
-        customerOrderOverviewList = list;
+        this.customerOrderOverviewList = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_customer_order, parent, false);
-        context = parent.getContext();
         return new ViewHolder(view);
     }
 
@@ -36,28 +35,33 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
         holder.priceTx.setText(order.price);
         holder.dateTx.setText(order.date);
         holder.orderId.setText(String.format("Mã: %s", order.id));
-        switch (order.state) {
-            case "paying":
-                holder.stateTx.setText("Đang đợi thanh toán.");
-                break;
-            case "completed":
-                holder.stateTx.setText("Đơn hàng đã hoàn thành");
-                break;
-            case "pending":
-                holder.stateTx.setText("Đang xử lý đơn hàng");
-                break;
-            case "denied":
-                holder.stateTx.setText("Đang hàng bị từ chối");
-                break;
-            default:
-                holder.stateTx.setText("");
-                break;
-        }
+        holder.stateTx.setText(getOrderStateText(order.state));
+        holder.view.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.view.getContext(), CustomerOrderDetailActivity.class);
+            intent.putExtra("order_id", order.id);
+            holder.view.getContext().startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
         return customerOrderOverviewList.size();
+    }
+
+    // Hàm tiện ích để ánh xạ trạng thái đơn hàng
+    private String getOrderStateText(String state) {
+        switch (state) {
+            case "paying":
+                return "Đang đợi thanh toán.";
+            case "completed":
+                return "Đơn hàng đã hoàn thành";
+            case "pending":
+                return "Đang xử lý đơn hàng";
+            case "denied":
+                return "Đơn hàng bị từ chối";
+            default:
+                return "";
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

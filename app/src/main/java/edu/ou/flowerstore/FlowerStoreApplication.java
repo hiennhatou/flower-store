@@ -2,6 +2,7 @@ package edu.ou.flowerstore;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -41,14 +42,13 @@ public class FlowerStoreApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ZaloPaySDK.init(2554, Environment.SANDBOX);
         FlowerStoreApplication.instance = this;
         appFirebase = new AppFirebase();
         currentUserLiveData.setValue(appFirebase.getFirebaseAuth().getCurrentUser());
-
         roomDB = Room.databaseBuilder(this.getApplicationContext(), RoomDB.class, "littleflower").allowMainThreadQueries().build();
         cartEntitiesLiveData = roomDB.cartDAO().getAllInCart();
 
-        ZaloPaySDK.init(2554, Environment.SANDBOX);
         cartEntitiesLiveData.observeForever(data -> {
             List<CartItem> cartItems = new ArrayList<>();
             List<String> productsId = data.stream().map(CartEntity::getProduct_id).collect(Collectors.toList());

@@ -21,7 +21,9 @@ public class AddCartDialog extends DialogFragment {
             getDialog().cancel();
         });
         view.findViewById(R.id.to_cart_btn).setOnClickListener(v -> {
-            startActivity(new Intent(requireContext(), CartActivity.class));
+            Intent intent = new Intent(requireContext(), CartActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
             getDialog().cancel();
         });
         return new AlertDialog.Builder(requireContext()).setView(view).create();

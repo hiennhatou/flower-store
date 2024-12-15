@@ -56,6 +56,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
         binding.cartBtn.setOnClickListener(v -> {
             Intent cartIntent = new Intent(this, CartActivity.class);
+            cartIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(cartIntent);
         });
         fetchProduct();

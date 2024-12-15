@@ -6,27 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.List;
+
 import edu.ou.flowerstore.R;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
     private Context context;
     private List<Product> productList;
 
-    public ProductAdapter(Context context, List<Product> productList) {
-        this.context = context;
+    public ProductAdapter(List<Product> productList, Context context) {
         this.productList = productList;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.item_product_detail, parent, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.product_detail_customer_tyni, parent, false);
         return new ProductViewHolder(itemView);
     }
 
@@ -34,17 +37,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText(product.getPrice());
-        holder.productDescription.setText(product.getDescription());
-        holder.productQuantity.setText("Số lượng: " + product.getQuantity());
 
-        //chỉnh format giá
+        // Định dạng giá sản phẩm
         double productPrice = Double.parseDouble(product.getPrice());
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        String formattedPrice = decimalFormat.format(productPrice) + " đ";
+        String formattedPrice = decimalFormat.format(productPrice) + " đ"; // Thêm đơn vị VND
 
-        holder.productPrice.setText(formattedPrice);
+        holder.productPrice.setText(formattedPrice); // Gán giá đã định dạng vào TextView
 
+        holder.productQuantity.setText("Số lượng: " + product.getQuantity());
+
+        // Hiển thị hình ảnh
         if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) {
             Picasso.get()
                     .load(product.getImageUrl())
@@ -56,6 +59,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
+
     @Override
     public int getItemCount() {
         return productList.size();
@@ -65,7 +69,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         public ImageView productImage;
         public TextView productName;
         public TextView productPrice;
-        public TextView productDescription;
         public TextView productQuantity;
 
         public ProductViewHolder(@NonNull View itemView) {
@@ -73,7 +76,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productImage = itemView.findViewById(R.id.product_img);
             productName = itemView.findViewById(R.id.product_name);
             productPrice = itemView.findViewById(R.id.product_price);
-            productDescription = itemView.findViewById(R.id.product_description);
             productQuantity = itemView.findViewById(R.id.product_quantity);
         }
     }

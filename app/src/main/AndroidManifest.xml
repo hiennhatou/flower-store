@@ -16,50 +16,86 @@
         android:theme="@style/Theme.FlowerStore"
         tools:ignore="ExtraText"
         tools:targetApi="31">
-
-        <activity
-            android:name=".ui.admin.AdminActivity"
-            android:exported="false" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_application_id" />
+        <activity
+            android:taskAffinity="edu.ou.littleflower"
+            android:name=".ui.orders.CustomerOrderDetailActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.payment.PaymentResultActivity"
+            android:exported="true"
+            android:taskAffinity="edu.ou.littleflower"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="paymentresult"
+                    android:scheme="littleflower" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:taskAffinity="edu.ou.littleflower"
+            android:name=".ui.payment.ZaloPayPaymentActivity"
+            android:exported="false" />
 
         <activity
+            android:taskAffinity="edu.ou.littleflower"
+            android:name=".ui.admin.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.makeorder.MakeOrderActivity"
             android:exported="false" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.orders.CustomerOrdersActivity"
             android:exported="false" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.authen.Login"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.authen.SignUp"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.profile.ModifyProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.categorydetail.CategoryDetailActivity"
             android:exported="false" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.cart.CartActivity"
             android:exported="false" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.orders.OrderDetailAdminActivity"
             android:exported="false" />
         <activity
+            android:taskAffinity="edu.ou.littleflower"
             android:name=".ui.productdetail.ProductDetailActivity"
             android:exported="false" />
-        <activity android:name=".ui.admin.OrderManagementActivity"
+        <activity
+            android:taskAffinity="edu.ou.littleflower"
+            android:name=".ui.admin.OrderManagementActivity"
             android:exported="false"/>
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:taskAffinity="edu.ou.littleflower">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
