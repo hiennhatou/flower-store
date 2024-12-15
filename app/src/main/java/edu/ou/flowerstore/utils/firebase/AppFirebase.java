@@ -21,6 +21,10 @@ public class AppFirebase {
         return firestore.collection("users");
     }
 
+    public CollectionReference getOrdersCollection() {
+        return firestore.collection("orders");
+    }
+
     public FirebaseAuth getFirebaseAuth() {
         return firebaseAuth;
     }

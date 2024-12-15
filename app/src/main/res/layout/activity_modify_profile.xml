@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
     tools:context=".ui.profile.ModifyProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -27,13 +26,13 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:paddingStart="5sp"
-                app:strokeColor="@color/black"
                 app:icon="@drawable/ic_back"
                 app:iconSize="28sp"
                 app:iconTint="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -50,17 +49,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0sp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingHorizontal="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivAvatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_avatar_placeholder" />
+            app:shapeAppearance="@style/RoundedSquare.50Percent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etName"
@@ -70,6 +69,7 @@
             android:hint="Họ Tên">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName" />
@@ -83,6 +83,7 @@
             android:hint="Số điện thoại">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone" />
@@ -96,11 +97,32 @@
             android:hint="Giới tính">
 
             <AutoCompleteTextView
+                android:id="@+id/gender"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="none"
                 app:simpleItems="@array/gender" />
+
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:startIconDrawable="@drawable/ic_calender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8sp"
+            android:id="@+id/birthday_section"
+            android:hint="Ngày sinh">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textColor="?attr/colorPrimary"
+                android:id="@+id/birthday"
+                android:focusable="false"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <!-- Nút Hoàn thiện hồ sơ -->
         <Button
@@ -109,10 +131,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
             android:layout_marginTop="32dp"
-            app:shapeAppearance="@style/RoundedSquare.20Percent"
             android:fontFamily="sans-serif-medium"
-            android:text="Hoàn thành hồ sơ"
-            android:textColor="#FFFFFF" />
+            android:text="Lưu thông tin"
+            android:textColor="#FFFFFF"
+            app:shapeAppearance="@style/RoundedSquare.20Percent" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
