@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ItemProductAdminBinding;
@@ -51,8 +52,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         // Gán dữ liệu vào giao diện
         holder.binding.tvTenSP.setText(product.getTenSP());
-        holder.binding.tvMoTa.setText(String.valueOf(product.getGia()));
-        holder.binding.tvGia.setText(String.valueOf(product.getSoLuong()));
+        holder.binding.tvMoTa.setText(String.valueOf(product.getMoTa()));
+
+        // Định dạng giá sản phẩm
+        double productPrice = product.getGia(); // Get the price as a double
+        DecimalFormat decimalFormat = new DecimalFormat("#,###"); // Format the price with commas
+        String formattedPrice = decimalFormat.format(productPrice) + " đ"; // Append " đ" for Vietnamese Dong
+
+        holder.binding.tvGia.setText(formattedPrice); // Gán giá đã định dạng vào TextView
+
         // Gán hình ảnh vào ImageView bằng Picasso
         String imageUrl = product.getHinhAnh(); // Giả sử 'getHinhAnh()' trả về URL của hình ảnh
         Picasso.get()
@@ -60,17 +68,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .placeholder(R.drawable.ic_avatar_placeholder) // Hiển thị placeholder khi hình ảnh đang tải
                 .into(holder.binding.imgHinhAnh); // Gán vào ImageView
 
-        if (product != null) {
-            holder.binding.tvTenSP.setText("Tên sản phẩm: " + product.getTenSP());
-            holder.binding.tvMoTa.setText("Mô tả: " + product.getMoTa());
-            holder.binding.tvGia.setText("Giá: " + product.getGia() + " VND");
+        // Gán thông tin chi tiết sản phẩm
+        holder.binding.tvTenSP.setText("Tên sản phẩm: " + product.getTenSP());
+        holder.binding.tvMoTa.setText("Mô tả: " + product.getMoTa());
+        holder.binding.tvGia.setText("Giá: " + formattedPrice); // Use formatted price here
 
-            // Load hình ảnh sử dụng Glide hoặc thư viện khác
-            Picasso.get()
-                    .load(product.getHinhAnh())
-                    .into(holder.binding.imgHinhAnh);
-
-        }
+        // Load hình ảnh sử dụng Glide hoặc thư viện khác
+        Picasso.get()
+                .load(product.getHinhAnh())
+                .into(holder.binding.imgHinhAnh);
 
         // Xử lý sự kiện click vào optionsMenu
         holder.binding.imgMenu.setOnClickListener(v -> {
@@ -89,6 +95,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             popup.show();
         });
     }
+
 
     @Override
     public int getItemCount() {

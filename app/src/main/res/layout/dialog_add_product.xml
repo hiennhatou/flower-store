@@ -21,13 +21,15 @@
         android:id="@+id/etSoLuong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Số lượng" />
+        android:hint="Số lượng"
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:id="@+id/etGia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Giá" />
+        android:hint="Giá"
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:id="@+id/etHinhAnh"
