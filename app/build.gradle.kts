@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.ui.auth)
+    implementation("com.google.firebase:firebase-database:20.3.2") // Thêm dòng này
     implementation(libs.facebook.android.sdk)
     implementation(libs.play.services.auth)
     implementation(libs.recyclerview)
@@ -73,5 +74,4 @@ dependencies {
     implementation(libs.constraintlayout)
 
     testImplementation(libs.junit)
-
 }

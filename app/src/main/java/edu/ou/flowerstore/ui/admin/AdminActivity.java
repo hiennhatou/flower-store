@@ -1,5 +1,6 @@
 package edu.ou.flowerstore.ui.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityAdminBinding;
+import edu.ou.flowerstore.ui.productadmin.QlySanPhamAdminActivity;
 
 public class AdminActivity extends AppCompatActivity {
     ActivityAdminBinding binding;
@@ -26,6 +28,11 @@ public class AdminActivity extends AppCompatActivity {
         });
         binding.backBtn.setOnClickListener(v -> {
             finish();
+        });
+
+        binding.productManagementBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivity.this, QlySanPhamAdminActivity.class);
+            startActivity(intent);
         });
     }
 }

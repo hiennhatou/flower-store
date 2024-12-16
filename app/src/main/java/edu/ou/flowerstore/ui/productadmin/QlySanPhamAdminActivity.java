@@ -15,6 +15,7 @@ import java.util.List;
 import edu.ou.flowerstore.databinding.ActivityQlySanPhamAdminBinding;
 
 public class QlySanPhamAdminActivity extends AppCompatActivity {
+
     private ActivityQlySanPhamAdminBinding binding;
     private List<Product> products;
     private ProductAdapter adapter;
@@ -27,6 +28,7 @@ public class QlySanPhamAdminActivity extends AppCompatActivity {
 
         products = new ArrayList<>();
         adapter = new ProductAdapter(products, this, new ProductAdapter.OnProductItemClickListener() {
+
             @Override
             public void onEditProduct(Product product) {
                 // Xử lý cập nhật sản phẩm

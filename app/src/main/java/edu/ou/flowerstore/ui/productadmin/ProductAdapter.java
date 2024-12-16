@@ -1,12 +1,21 @@
 package edu.ou.flowerstore.ui.productadmin;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,6 +60,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .placeholder(R.drawable.ic_avatar_placeholder) // Hiển thị placeholder khi hình ảnh đang tải
                 .into(holder.binding.imgHinhAnh); // Gán vào ImageView
 
+        if (product != null) {
+            holder.binding.tvTenSP.setText("Tên sản phẩm: " + product.getTenSP());
+            holder.binding.tvMoTa.setText("Mô tả: " + product.getMoTa());
+            holder.binding.tvGia.setText("Giá: " + product.getGia() + " VND");
+
+            // Load hình ảnh sử dụng Glide hoặc thư viện khác
+            Picasso.get()
+                    .load(product.getHinhAnh())
+                    .into(holder.binding.imgHinhAnh);
+
+        }
 
         // Xử lý sự kiện click vào optionsMenu
         holder.binding.imgMenu.setOnClickListener(v -> {
@@ -82,5 +102,115 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    private void deleteSanPham(int position) {
+        // Lấy sản phẩm cần xóa
+        Product product = products.get(position);
+        if (product == null || product.getMaSanPham() == null) {
+            Toast.makeText(context, "Sản phẩm không hợp lệ", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Xác nhận việc xóa sản phẩm
+        new AlertDialog.Builder(context)
+                .setTitle("Xóa sản phẩm")
+                .setMessage("Bạn có chắc chắn muốn xóa sản phẩm này không?")
+                .setPositiveButton("Xóa", (dialog, which) -> {
+                    // Xóa sản phẩm khỏi danh sách
+                    products.remove(position);
+
+                    // Xóa sản phẩm khỏi Firebase Realtime Database
+                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+                    dbRef.child("SanPham").child(product.getMaSanPham()).removeValue()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    // Thông báo thành công
+                                    Toast.makeText(context, "Sản phẩm đã được xóa", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // Xử lý lỗi
+                                    Toast.makeText(context, "Lỗi khi xóa sản phẩm", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                    // Thông báo adapter cập nhật
+                    notifyDataSetChanged();
+                })
+                .setNegativeButton("Không", null)
+                .show();
+    }
+
+    private boolean handleMenuItemClick(MenuItem item, int position) {
+        // Xử lý sự kiện cho các mục trong menu
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.action_edit) {
+            editSanPham(position);
+            return true;
+        } else if (itemId == R.id.action_delete) {
+            deleteSanPham(position);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void editSanPham(int position) {
+        // Lấy sản phẩm cần sửa
+        Product product = products.get(position);
+        if (product == null) {
+            return;
+        }
+
+        // Hiển thị hộp thoại sửa sản phẩm
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_edit_product, null);
+        builder.setView(dialogView);
+
+        TextView tvMaSanPham = dialogView.findViewById(R.id.etMaSanPham);
+        EditText etTenSP = dialogView.findViewById(R.id.etTenSP);
+        EditText etMoTa = dialogView.findViewById(R.id.etMoTa);
+        EditText etGia = dialogView.findViewById(R.id.etGia);
+
+        // Đặt giá trị ban đầu cho các trường
+        tvMaSanPham.setText("Mã sản phẩm: " + product.getMaSanPham());
+        etTenSP.setText(product.getTenSP());
+        etMoTa.setText(product.getMoTa());
+        etGia.setText(String.valueOf(product.getGia()));
+
+        builder.setPositiveButton("Lưu", (dialog, which) -> {
+            // Cập nhật thông tin sản phẩm
+            product.setTenSP(etTenSP.getText().toString());
+            product.setMoTa(etMoTa.getText().toString());
+            product.setGia(Double.parseDouble(etGia.getText().toString()));
+
+            // Cập nhật thông tin trong Firebase
+            updateSanPhamInDatabase (product);
+
+            // Thông báo adapter cập nhật
+            notifyDataSetChanged();
+        });
+
+        builder.setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void updateSanPhamInDatabase(Product sanPham) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("SanPham");
+
+        dbRef.child(sanPham.getMaSanPham()).setValue(sanPham)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Thông báo thành công
+                        Toast.makeText(context, "Sản phẩm đã được cập nhật", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Xử lý lỗi
+                        Toast.makeText(context, "Lỗi khi cập nhật sản phẩm", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }
