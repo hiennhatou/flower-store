@@ -6,4 +6,6 @@
     <color name="brown">#AB886D</color>
     <color name="grey">#888484</color>
     <color name="grey_light">#F9F1F0</color>
+    <color name="yellow">#ffff00</color>
+    <color name="light_yellow">#ffffdf</color>
 </resources>
