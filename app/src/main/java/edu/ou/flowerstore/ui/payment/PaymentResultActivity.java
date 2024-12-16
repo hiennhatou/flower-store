@@ -16,6 +16,7 @@ import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.MainActivity;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityPaymentResultBinding;
+import edu.ou.flowerstore.ui.orders.CustomerOrderDetailActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 import edu.ou.flowerstore.utils.zalopay.ResponseCreateZalopayOrderBody;
 import edu.ou.flowerstore.utils.zalopay.ZaloPayUtil;
@@ -60,6 +61,12 @@ public class PaymentResultActivity extends AppCompatActivity {
             newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(newIntent);
             finish();
+        });
+
+        binding.toOrderDetail.setOnClickListener(v -> {
+            Intent newIntent = new Intent(PaymentResultActivity.this, CustomerOrderDetailActivity.class);
+            newIntent.putExtra("order_id", orderId);
+            startActivity(newIntent);
         });
 
         ZaloPayUtil.queryTransStatus(transId).enqueue(new Callback<ResponseCreateZalopayOrderBody>() {
