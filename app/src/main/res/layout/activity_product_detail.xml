@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.productdetail.ProductDetailActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0sp"
         app:layout_constraintBottom_toTopOf="@id/action_section"
@@ -94,6 +94,8 @@
                     android:text="Mô tả sản phẩm"
                     android:textSize="20sp" />
 
+
+
                 <TextView
                     android:id="@+id/product_description"
                     android:layout_width="match_parent"
@@ -110,13 +112,7 @@ Mặt khác, chúng tôi tố cáo với sự phẫn nộ chính đáng và chá
                     android:layout_height="wrap_content"
                     android:text="Thêm đánh giá" />
 
-                <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5.0"
-                    android:textSize="18sp"
-                    android:drawableStart="@drawable/star" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/reviews_recycler_view"
@@ -125,7 +121,7 @@ Mặt khác, chúng tôi tố cáo với sự phẫn nộ chính đáng và chá
                     android:layout_marginTop="16dp" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/action_section"

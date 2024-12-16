@@ -62,7 +62,7 @@ dependencies {
     implementation(libs.lifecycle.common.java8)
     implementation(libs.guava)
     implementation(libs.concurrent.futures)
-
+    implementation ("com.google.android.material:material:1.6.1")
     implementation(libs.annotation)
     implementation(libs.flexbox)
     implementation(libs.appcompat)

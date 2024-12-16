@@ -106,14 +106,18 @@ public class ProductDetailActivity extends AppCompatActivity {
                 binding.productCategory.setText(categorySnapshot.getString("name"));
             });
 
-            snapshot.getReference().collection("reviews").aggregate(AggregateField.average("rate")).get(AggregateSource.SERVER).addOnCompleteListener(task -> {
-                if (task.isSuccessful() && task.getResult().get(AggregateField.average("rate")) != null) {
-                    double result = task.getResult().get(AggregateField.average("rate"));
-                    binding.rate.setText(decimalFormat.format(result));
-                } else {
-                    binding.rate.setText("5,0");
-                }
-            });
+            snapshot.getReference().collection("reviews")
+                    .aggregate(AggregateField.average("rate"))
+                    .get(AggregateSource.SERVER)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult().get(AggregateField.average("rate")) != null) {
+                            double averageRate = task.getResult().get(AggregateField.average("rate"));
+                            binding.rate.setText(decimalFormat.format(averageRate));
+                        } else {
+
+                            binding.rate.setText("Chưa có đánh giá");
+                        }
+                    });
 
             binding.productName.setText(productName);
             binding.productDescription.setText(Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY));
