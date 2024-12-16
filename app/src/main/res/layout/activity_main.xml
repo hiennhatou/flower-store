@@ -11,8 +11,10 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0sp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-28dp" />
     <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:elevation="10sp"
