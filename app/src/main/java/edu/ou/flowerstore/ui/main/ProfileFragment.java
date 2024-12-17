@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.main_fragment_profile, container, false);
-        application.getCurrentUserLiveData().observe(getViewLifecycleOwner(), this::renderFragment);
+        renderFragment(application.getAppFirebase().getFirebaseAuth().getCurrentUser());
         return view;
     }
 

@@ -7,20 +7,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
 import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.ui.main.MainActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class Login extends AppCompatActivity {
@@ -81,16 +79,16 @@ public class Login extends AppCompatActivity {
 
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
-                            application.getCurrentUserLiveData().setValue(firebase.getFirebaseAuth().getCurrentUser());
-                            finish();
-                        } else {
-                            Toast.makeText(Login.this, "Lỗi!!!", Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Exception exception = task.getException();
+                        if (exception instanceof FirebaseAuthInvalidCredentialsException)
+                            Toast.makeText(this, "Thông tin đăng nhập không hợp lệ", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

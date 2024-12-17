@@ -80,7 +80,7 @@
             android:name=".ui.authen.Login"
             android:exported="false"
             android:taskAffinity="edu.ou.littleflower"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.authen.SignUp"
             android:exported="false"

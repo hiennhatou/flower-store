@@ -38,8 +38,6 @@ public class FlowerStoreApplication extends Application {
     private RoomDB roomDB;
     private LiveData<List<CartEntity>> cartEntitiesLiveData;
 
-    private MutableLiveData<FirebaseUser> currentUserLiveData = new MutableLiveData<>(null);
-
     private final MutableLiveData<List<CartItem>> cartItemsLiveData = new MutableLiveData<>(new ArrayList<>());
 
     @Override
@@ -54,7 +52,6 @@ public class FlowerStoreApplication extends Application {
         MediaManager.init(this, config);
         FlowerStoreApplication.instance = this;
         appFirebase = new AppFirebase();
-        currentUserLiveData.setValue(appFirebase.getFirebaseAuth().getCurrentUser());
         roomDB = Room.databaseBuilder(this.getApplicationContext(), RoomDB.class, "littleflower").allowMainThreadQueries().build();
         cartEntitiesLiveData = roomDB.cartDAO().getAllInCart();
 
@@ -81,10 +78,6 @@ public class FlowerStoreApplication extends Application {
                 cartItemsLiveData.setValue(cartItems);
             });
         });
-    }
-
-    public MutableLiveData<FirebaseUser> getCurrentUserLiveData() {
-        return currentUserLiveData;
     }
 
     public MutableLiveData<List<CartItem>> getCartItemsLiveData() {

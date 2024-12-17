@@ -3,6 +3,7 @@ package edu.ou.flowerstore.ui.authen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldValue;
 
@@ -23,10 +25,12 @@ import java.util.Map;
 
 import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.ui.main.MainActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class SignUp extends AppCompatActivity {
     Button btnSignup, backBtn;
+    CheckBox cbTerms;
     EditText edtEmail, edtPassword, etName;
     private AppFirebase appFirebase = new AppFirebase();
     private final FlowerStoreApplication application = FlowerStoreApplication.getInstance();
@@ -93,11 +97,16 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
+        if (!cbTerms.isChecked()) {
+            isProgressing.setValue(false);
+            Toast.makeText(this, "Vui lòng đồng ý điều khoản trước khi đăng ký", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         appFirebase.getFirebaseAuth().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful() && task.getResult().getUser() != null) {
                         FirebaseUser user = task.getResult().getUser();
-                        application.getCurrentUserLiveData().setValue(user);
                         Map<String, Object> userData = new HashMap<>();
                         userData.put("name", name);
                         userData.put("created_date", FieldValue.serverTimestamp());
@@ -115,11 +124,15 @@ public class SignUp extends AppCompatActivity {
                                 Toast.makeText(SignUp.this, "Lỗi!!!", Toast.LENGTH_SHORT).show();
                             }
                             isProgressing.setValue(false);
-                            finish();
+                            Intent intent = new Intent(this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                         });
                     } else {
                         isProgressing.setValue(false);
-                        Toast.makeText(SignUp.this, "Lỗi!!!", Toast.LENGTH_SHORT).show();
+                        Exception exception = task.getException();
+                        if (exception instanceof FirebaseAuthUserCollisionException)
+                            Toast.makeText(this, "Email đã tồn tại", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -130,5 +143,6 @@ public class SignUp extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         etName = findViewById(R.id.edtName);
         backBtn = findViewById(R.id.iv_back);
+        cbTerms = findViewById(R.id.cbTerms);
     }
 }

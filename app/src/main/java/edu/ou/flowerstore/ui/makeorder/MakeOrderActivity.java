@@ -56,7 +56,7 @@ public class MakeOrderActivity extends AppCompatActivity {
         application = FlowerStoreApplication.getInstance();
         cart = application.getCartItemsLiveData();
         appFirebase = application.getAppFirebase();
-        if (application.getCurrentUserLiveData().getValue() == null) {
+        if (application.getAppFirebase().getFirebaseAuth().getCurrentUser() == null) {
             startActivity(new Intent(MakeOrderActivity.this, Login.class));
             finish();
         }
