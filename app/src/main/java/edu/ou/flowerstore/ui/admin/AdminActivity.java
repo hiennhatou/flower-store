@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityAdminBinding;
+import edu.ou.flowerstore.ui.admin.orders.OrderManagementActivity;
+import edu.ou.flowerstore.ui.admin.products.AdminProductManagementActivity;
 
 public class AdminActivity extends AppCompatActivity {
     ActivityAdminBinding binding;
@@ -35,6 +37,11 @@ public class AdminActivity extends AppCompatActivity {
 
         binding.orderManagementBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, OrderManagementActivity.class);
+            startActivity(intent);
+        });
+
+        binding.productManagementBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AdminProductManagementActivity.class);
             startActivity(intent);
         });
     }

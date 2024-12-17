@@ -1,4 +1,4 @@
-package edu.ou.flowerstore.ui.admin;
+package edu.ou.flowerstore.ui.admin.orders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import java.util.Locale;
 import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityOrderManagementBinding;
-import edu.ou.flowerstore.ui.orders.OrderDetailAdminActivity;
+import edu.ou.flowerstore.ui.admin.OrderAdapter;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class OrderManagementActivity extends AppCompatActivity implements OrderAdapter.OnOrderClickListener {
@@ -76,7 +76,7 @@ public class OrderManagementActivity extends AppCompatActivity implements OrderA
 
     @Override
     public void onOrderClick(String orderId) {
-        Intent intent = new Intent(this, OrderDetailAdminActivity.class);
+        Intent intent = new Intent(this, AdminOrderDetailActivity.class);
         intent.putExtra("orderId", orderId); // Truyền orderId
         startActivity(intent);
     }

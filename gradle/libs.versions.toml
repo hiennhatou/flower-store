@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.2"
 annotation = "1.9.1"
+cloudinaryAndroid = "3.0.2"
 concurrentFutures = "1.2.0"
 converterGson = "2.9.0"
 facebookAndroidSdk = "17.0.2"
@@ -25,6 +26,7 @@ volley = "1.2.1"
 
 [libraries]
 annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+cloudinary-android = { module = "com.cloudinary:cloudinary-android", version.ref = "cloudinaryAndroid" }
 concurrent-futures = { module = "androidx.concurrent:concurrent-futures", version.ref = "concurrentFutures" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 facebook-android-sdk = { module = "com.facebook.android:facebook-android-sdk", version.ref = "facebookAndroidSdk" }

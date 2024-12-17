@@ -1,4 +1,4 @@
-package edu.ou.flowerstore.ui.orders;
+package edu.ou.flowerstore.ui.admin.orders;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -18,14 +18,14 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import edu.ou.flowerstore.R;
 
-public class OrderDetailAdminActivity extends AppCompatActivity {
+public class AdminOrderDetailActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private TextView orderIdTextView, customerNameTextView, shippingAddressTextView, totalPriceTextView, orderStatusTextView;
     private Button rejectButton, completeButton;
     private RecyclerView productRecyclerView;
-    private ProductAdminAdapter productAdapter;
-    private List<ProductAdmin> productList;
+    private AdminOrderDetailProductAdapter productAdapter;
+    private List<AdminOrderDetailProduct> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
         productRecyclerView = findViewById(R.id.product_list);
         productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         productList = new ArrayList<>();
-        productAdapter = new ProductAdminAdapter(this, productList);
+        productAdapter = new AdminOrderDetailProductAdapter(this, productList);
         productRecyclerView.setAdapter(productAdapter);
 
         // Nhận orderId từ Intent
@@ -130,7 +130,7 @@ public class OrderDetailAdminActivity extends AppCompatActivity {
                                 int quantity = ((Long) productMap.get("quantity")).intValue();
                                 totalPrice.updateAndGet(v -> v + productPrice * quantity);
 
-                                productList.add(new ProductAdmin(productName, productDescription, String.valueOf(productPrice), productImage, quantity));
+                                productList.add(new AdminOrderDetailProduct(productName, productDescription, String.valueOf(productPrice), productImage, quantity));
                                 productAdapter.notifyDataSetChanged();
 
                                 totalPriceTextView.setText("Tổng tiền: " + String.format("%,.0f", totalPrice.get()) + " đ");

@@ -1,4 +1,4 @@
-package edu.ou.flowerstore.ui.orders;
+package edu.ou.flowerstore.ui.admin.orders;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,11 +17,11 @@ import java.util.List;
 
 import edu.ou.flowerstore.R;
 
-public class ProductAdminAdapter extends RecyclerView.Adapter<ProductAdminAdapter.ProductViewHolder> {
+public class AdminOrderDetailProductAdapter extends RecyclerView.Adapter<AdminOrderDetailProductAdapter.ProductViewHolder> {
     private Context context;
-    private List<ProductAdmin> productList;
+    private List<AdminOrderDetailProduct> productList;
 
-    public ProductAdminAdapter(Context context, List<ProductAdmin> productList) {
+    public AdminOrderDetailProductAdapter(Context context, List<AdminOrderDetailProduct> productList) {
         this.context = context;
         this.productList = productList;
     }
@@ -35,7 +35,7 @@ public class ProductAdminAdapter extends RecyclerView.Adapter<ProductAdminAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        ProductAdmin product = productList.get(position);
+        AdminOrderDetailProduct product = productList.get(position);
         holder.productName.setText(product.getName());
         holder.productPrice.setText(product.getPrice());
         holder.productDescription.setText(product.getDescription());

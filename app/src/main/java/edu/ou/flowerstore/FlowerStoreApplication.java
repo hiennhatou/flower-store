@@ -9,12 +9,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
+import com.cloudinary.android.MediaManager;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -43,6 +46,12 @@ public class FlowerStoreApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ZaloPaySDK.init(2554, Environment.SANDBOX);
+        Map<String, Object> config = new HashMap();
+        config.put("cloud_name", "flower-store");
+        config.put("api_key", "284656339967919");
+        config.put("api_secret", "rsQdMHN8dsMpAoRYMbGGvIbMLyU");
+        config.put("secure", true);
+        MediaManager.init(this, config);
         FlowerStoreApplication.instance = this;
         appFirebase = new AppFirebase();
         currentUserLiveData.setValue(appFirebase.getFirebaseAuth().getCurrentUser());

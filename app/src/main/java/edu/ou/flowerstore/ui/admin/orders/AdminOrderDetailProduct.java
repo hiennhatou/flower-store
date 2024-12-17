@@ -1,13 +1,13 @@
-package edu.ou.flowerstore.ui.orders;
+package edu.ou.flowerstore.ui.admin.orders;
 
-public class ProductAdmin {
+public class AdminOrderDetailProduct {
     private String name;
     private String description;
     private String price;
     private String imageUrl;
     private int quantity;
 
-    public ProductAdmin(String name, String description, String price, String imageUrl, int quantity) {
+    public AdminOrderDetailProduct(String name, String description, String price, String imageUrl, int quantity) {
         this.name = name;
         this.description = description;
         this.price = price;

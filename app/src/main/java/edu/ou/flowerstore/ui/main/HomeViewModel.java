@@ -27,7 +27,7 @@ public class HomeViewModel extends ViewModel {
 
     public Task<QuerySnapshot> loadProducts() {
         if (isEndOfProductCollection) return null;
-        Query query = appFirebase.getProductsCollection().orderBy("created_date", Query.Direction.DESCENDING).orderBy(FieldPath.documentId(), Query.Direction.ASCENDING).limit(10);
+        Query query = appFirebase.getProductsCollection().where(Filter.equalTo("status", true)).orderBy("created_date", Query.Direction.DESCENDING).orderBy(FieldPath.documentId(), Query.Direction.ASCENDING).limit(10);
         if (!products.isEmpty()) {
             OverviewProductAdapter.OverviewProduct lastProduct = products.get(products.size() - 1);
             query = query.where(Filter.or(

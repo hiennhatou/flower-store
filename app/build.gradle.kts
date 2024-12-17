@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.volley)
+    implementation(libs.cloudinary.android)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
