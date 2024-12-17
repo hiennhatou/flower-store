@@ -152,7 +152,7 @@ public class AdminUserDetailActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(String requestId, Map resultData) {
-                imageUrl = MediaManager.get().url().transformation(new Transformation().fetchFormat("webp").width(60).quality("auto:eco")).generate((String) resultData.get("display_name"));
+                imageUrl = MediaManager.get().url().transformation(new Transformation().fetchFormat("webp").width(180).quality("auto:eco")).generate((String) resultData.get("display_name"));
                 updateUser();
             }
 

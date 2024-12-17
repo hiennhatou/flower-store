@@ -1,4 +1,4 @@
-package edu.ou.flowerstore.ui.admin;
+package edu.ou.flowerstore.ui.admin.orders;
 
 import android.content.Context;
 import android.view.LayoutInflater;

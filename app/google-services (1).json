@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "984166938389",
+    "project_id": "firestore-d3aa9",
+    "storage_bucket": "firestore-d3aa9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984166938389:android:42021969dcb3a99afa5b1c",
+        "android_client_info": {
+          "package_name": "edu.ou.flowerstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984166938389-b97lidmffku21s1djslnn8vit4d2f1ah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.ou.flowerstore",
+            "certificate_hash": "371b6b7dd33febbcda90cd44cb9eee5ce358cd18"
+          }
+        },
+        {
+          "client_id": "984166938389-d2fjl62qootg6v5uqdb3pktoedhi1hut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwRdF9AK04x2cgGIwQw8_voC0cX8NF2gI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984166938389-d2fjl62qootg6v5uqdb3pktoedhi1hut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

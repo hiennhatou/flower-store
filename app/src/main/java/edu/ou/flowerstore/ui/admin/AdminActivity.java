@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityAdminBinding;
+import edu.ou.flowerstore.ui.admin.categories.AdminCategoryActivity;
 import edu.ou.flowerstore.ui.admin.orders.OrderManagementActivity;
 import edu.ou.flowerstore.ui.admin.products.AdminProductManagementActivity;
 import edu.ou.flowerstore.ui.admin.users.AdminUserMangementActivity;
@@ -48,6 +49,10 @@ public class AdminActivity extends AppCompatActivity {
 
         binding.userManagementBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, AdminUserMangementActivity.class));
+        });
+
+        binding.categoryManagementBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, AdminCategoryActivity.class));
         });
     }
 }

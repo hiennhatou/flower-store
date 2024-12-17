@@ -20,7 +20,6 @@ import java.util.Locale;
 import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityOrderManagementBinding;
-import edu.ou.flowerstore.ui.admin.OrderAdapter;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class OrderManagementActivity extends AppCompatActivity implements OrderAdapter.OnOrderClickListener {
