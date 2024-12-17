@@ -22,7 +22,7 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private TextView orderIdTextView, customerNameTextView, shippingAddressTextView, totalPriceTextView, orderStatusTextView;
-    private Button rejectButton, completeButton;
+    private Button rejectButton, completeButton, backButton;
     private RecyclerView productRecyclerView;
     private AdminOrderDetailProductAdapter productAdapter;
     private List<AdminOrderDetailProduct> productList;
@@ -30,7 +30,7 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_detail_admin);
+        setContentView(R.layout.activity_admin_order_detail);
 
         db = FirebaseFirestore.getInstance();
 
@@ -41,6 +41,7 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
         orderStatusTextView = findViewById(R.id.order_status);
         rejectButton = findViewById(R.id.reject_button);
         completeButton = findViewById(R.id.complete_button);
+        backButton = findViewById(R.id.ivBack);
 
         productRecyclerView = findViewById(R.id.product_list);
         productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,6 +69,8 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
             updateOrderStatus(orderId, "completed", System.currentTimeMillis());
             Toast.makeText(this, "Đã hoàn thành đơn hàng!", Toast.LENGTH_SHORT).show();
         });
+
+        backButton.setOnClickListener(v -> finish());
     }
 
     private void loadOrderDetails(String orderId) {

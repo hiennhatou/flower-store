@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,7 +33,7 @@ public class ModifyProfileActivity extends AppCompatActivity {
     private final AppFirebase appFirebase = new AppFirebase();
     private final FirebaseUser user = appFirebase.getFirebaseAuth().getCurrentUser();
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("vi", "vn"));
-    MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Chọn ngày sinh").build();
+    MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().setCalendarConstraints(new CalendarConstraints.Builder().setValidator(DateValidatorPointBackward.now()).build()).setTitleText("Chọn ngày sinh").build();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +73,10 @@ public class ModifyProfileActivity extends AppCompatActivity {
             String phoneNumber = binding.edtPhoneNumber.getText() != null ? binding.edtPhoneNumber.getText().toString().trim() : null;
             String gender = binding.gender.getText() != null ? binding.gender.getText().toString().trim() : null;
             String birthday = binding.birthday.getText() != null ? binding.birthday.getText().toString().trim() : null;
+            if (name == null) {
+                Toast.makeText(this, "Không để tên trống", Toast.LENGTH_LONG).show();
+                return;
+            }
             Map<String, Object> updatedData = new HashMap<>();
             updatedData.put("name", name);
             updatedData.put("phoneNumber", phoneNumber);

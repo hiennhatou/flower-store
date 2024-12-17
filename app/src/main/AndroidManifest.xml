@@ -18,9 +18,15 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
-            android:name=".ui.admin.products.AdminProductDetailActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:name=".ui.admin.users.AdminUserDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.admin.users.AdminUserMangementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.products.AdminProductDetailActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.admin.products.AdminProductManagementActivity"
             android:exported="false" />

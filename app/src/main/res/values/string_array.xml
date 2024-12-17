@@ -4,4 +4,8 @@
         <item>Nam</item>
         <item>Nữ</item>
     </string-array>
+    <string-array name="role">
+        <item>customer</item>
+        <item>admin</item>
+    </string-array>
 </resources>

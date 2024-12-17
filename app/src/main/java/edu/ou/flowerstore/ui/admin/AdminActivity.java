@@ -13,6 +13,7 @@ import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityAdminBinding;
 import edu.ou.flowerstore.ui.admin.orders.OrderManagementActivity;
 import edu.ou.flowerstore.ui.admin.products.AdminProductManagementActivity;
+import edu.ou.flowerstore.ui.admin.users.AdminUserMangementActivity;
 
 public class AdminActivity extends AppCompatActivity {
     ActivityAdminBinding binding;
@@ -43,6 +44,10 @@ public class AdminActivity extends AppCompatActivity {
         binding.productManagementBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminProductManagementActivity.class);
             startActivity(intent);
+        });
+
+        binding.userManagementBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, AdminUserMangementActivity.class));
         });
     }
 }

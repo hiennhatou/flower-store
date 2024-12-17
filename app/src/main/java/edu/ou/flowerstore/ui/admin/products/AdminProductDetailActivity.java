@@ -49,6 +49,7 @@ import java.util.stream.Collectors;
 import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityAdminProductDetailBinding;
+import edu.ou.flowerstore.ui.admin.users.AdminUserDetailActivity;
 
 public class AdminProductDetailActivity extends AppCompatActivity {
     ActivityAdminProductDetailBinding binding;
@@ -230,7 +231,8 @@ public class AdminProductDetailActivity extends AppCompatActivity {
 
             @Override
             public void onError(String requestId, ErrorInfo error) {
-
+                progressingDialog.cancel();
+                Toast.makeText(AdminProductDetailActivity.this, "Lỗi", Toast.LENGTH_LONG).show();
             }
 
             @Override
