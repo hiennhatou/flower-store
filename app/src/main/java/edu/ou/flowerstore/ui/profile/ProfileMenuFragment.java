@@ -25,6 +25,7 @@ import edu.ou.flowerstore.FlowerStoreApplication;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.ui.admin.AdminActivity;
 import edu.ou.flowerstore.ui.cart.CartActivity;
+import edu.ou.flowerstore.ui.main.MainActivity;
 import edu.ou.flowerstore.ui.orders.CustomerOrdersActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
@@ -69,7 +70,9 @@ public class ProfileMenuFragment extends Fragment {
         dialogView.findViewById(R.id.logout_button).setOnClickListener(l -> {
             appFirebase.getFirebaseAuth().signOut();
             alertDialog.cancel();
-            application.getCurrentUserLiveData().setValue(appFirebase.getFirebaseAuth().getCurrentUser());
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
         dialogView.findViewById(R.id.cancel_button).setOnClickListener(l -> {
             alertDialog.cancel();
