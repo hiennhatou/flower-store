@@ -104,16 +104,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Nút Quên mật khẩu -->
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="Quên mật khẩu?"
-            android:textColor="?attr/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/relativePasswordLayout" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvForgotPassword"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:text="Quên mật khẩu?"-->
+<!--            android:textColor="?attr/colorPrimary"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/relativePasswordLayout" />-->
 
         <!-- Nút Đăng nhập -->
         <Button
@@ -126,45 +126,45 @@
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvForgotPassword"
+            app:layout_constraintTop_toBottomOf="@id/relativePasswordLayout"
             app:shapeAppearance="@style/RoundedSquare.20Percent" />
 
-        <TextView
-            android:id="@+id/tvOrSignInWith"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Hoặc đăng nhập với"
-            android:textColor="#A0A0A0"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvOrSignInWith"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:text="Hoặc đăng nhập với"-->
+<!--            android:textColor="#A0A0A0"-->
+<!--            android:textSize="14sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/btnSignIn" />-->
 
         <!-- Biểu tượng các tài khoản mạng xã hội -->
-        <LinearLayout
-            android:id="@+id/linearLayoutSocialIcons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvOrSignInWith">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/linearLayoutSocialIcons"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tvOrSignInWith">-->
 
-            <ImageView
-                android:id="@+id/ivGoogle"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/google_logo" />
+<!--            <ImageView-->
+<!--                android:id="@+id/ivGoogle"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:src="@drawable/google_logo" />-->
 
-            <ImageView
-                android:id="@+id/ivFacebook"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/facebook_logo" />
-        </LinearLayout>
+<!--            <ImageView-->
+<!--                android:id="@+id/ivFacebook"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:src="@drawable/facebook_logo" />-->
+<!--        </LinearLayout>-->
 
         <!-- Link Đăng ký tài khoản mới -->
         <TextView
@@ -177,7 +177,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutSocialIcons" />
+            app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

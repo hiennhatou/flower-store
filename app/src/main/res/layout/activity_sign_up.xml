@@ -161,42 +161,42 @@
             app:layout_constraintTop_toBottomOf="@id/cbTerms"
             app:shapeAppearance="@style/RoundedSquare.30Percent" />
 
-        <TextView
-            android:id="@+id/tvOrSignUpWith"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:text="Hoặc đăng ký với"
-            android:textColor="#A0A0A0"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvOrSignUpWith"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="17dp"-->
+<!--            android:text="Hoặc đăng ký với"-->
+<!--            android:textColor="#A0A0A0"-->
+<!--            android:textSize="14sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/btnSignUp" />-->
 
         <!-- Biểu tượng các tài khoản mạng xã hội -->
-        <LinearLayout
-            android:id="@+id/linearLayoutSocialIcons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOrSignUpWith">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/linearLayoutSocialIcons"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tvOrSignUpWith">-->
 
-            <ImageView
-                android:id="@+id/ivGoogle"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/google_logo" />
+<!--            <ImageView-->
+<!--                android:id="@+id/ivGoogle"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:src="@drawable/google_logo" />-->
 
-            <ImageView
-                android:id="@+id/ivFacebook"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/facebook_logo" />
-        </LinearLayout>
+<!--            <ImageView-->
+<!--                android:id="@+id/ivFacebook"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:src="@drawable/facebook_logo" />-->
+<!--        </LinearLayout>-->
 
         <!-- Link Đăng nhập -->
         <TextView
@@ -209,7 +209,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutSocialIcons" />
+            app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
