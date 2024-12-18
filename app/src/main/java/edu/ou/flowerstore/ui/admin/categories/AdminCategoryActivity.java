@@ -1,5 +1,6 @@
 package edu.ou.flowerstore.ui.admin.categories;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -36,5 +37,8 @@ public class AdminCategoryActivity extends AppCompatActivity {
         binding.backBtn.setOnClickListener(v -> finish());
         binding.categoriesList.setLayoutManager(new LinearLayoutManager(this));
         binding.categoriesList.setAdapter(viewModel.getAdapter());
+        binding.addCategoryBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, AdminCategoryDetailActivity.class));
+        });
     }
 }
