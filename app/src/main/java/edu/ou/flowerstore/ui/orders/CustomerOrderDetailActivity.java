@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.ui.makeorder.MakeOrderActivity;
+import edu.ou.flowerstore.ui.payment.ZaloPayPaymentActivity;
 
 public class CustomerOrderDetailActivity extends AppCompatActivity {
 
@@ -81,7 +83,12 @@ public class CustomerOrderDetailActivity extends AppCompatActivity {
             if (orderSnapshot.exists()) {
                 // Cập nhật thông tin mã đơn hàng
                 orderIdTextView.setText("Mã đơn hàng: " + orderId);
-
+                btn_checkout.setOnClickListener(v -> {
+                    Intent intent = new Intent(CustomerOrderDetailActivity.this, ZaloPayPaymentActivity.class);
+                    intent.putExtra("orderId", orderId);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                });
 
                 DocumentReference userRef = (DocumentReference) orderSnapshot.get("user");
                 if (userRef != null) {
