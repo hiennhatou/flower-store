@@ -48,6 +48,10 @@ public class AdminUserManagementViewModel extends ViewModel {
         });
     }
 
+    public List<OverviewUser> getUsers() {
+        return users;
+    }
+
     public OverviewUserAdapter getAdapter() {
         return adapter;
     }

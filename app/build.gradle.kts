@@ -2,10 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services") version "4.4.2"
 }
-
 android {
     namespace = "edu.ou.flowerstore"
     compileSdk = 34
+    android.buildFeatures.buildConfig = true
 
     defaultConfig {
         applicationId = "edu.ou.flowerstore"
@@ -15,6 +15,37 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "CLOUDINARY_API_KEY",
+            "\"${providers.gradleProperty("CLOUDINARY_API_KEY").get()}\""
+        )
+        buildConfigField(
+            "String",
+            "CLOUDINARY_KEY_SECRET",
+            "\"${providers.gradleProperty("CLOUDINARY_KEY_SECRET").get()}\""
+        )
+        buildConfigField(
+            "String",
+            "CLOUDINARY_NAME",
+            "\"${providers.gradleProperty("CLOUDINARY_NAME").get()}\""
+        )
+
+        buildConfigField(
+            "String",
+            "ZALO_PAY_APP_ID",
+            "\"${
+                if (providers.gradleProperty("ZALO_PAY_APP_ID")
+                        .isPresent()
+                ) providers.gradleProperty("ZALO_PAY_APP_ID").get() else "0"
+            }\""
+        )
+        buildConfigField(
+            "String",
+            "ZALO_PAY_KEY1",
+            "\"${providers.gradleProperty("ZALO_PAY_KEY1").get()}\""
+        )
     }
 
     buildTypes {

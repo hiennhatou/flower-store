@@ -1,5 +1,6 @@
 package edu.ou.flowerstore.ui.admin.orders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
     private RecyclerView productRecyclerView;
     private AdminOrderDetailProductAdapter productAdapter;
     private List<AdminOrderDetailProduct> productList;
+    private String orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,7 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
         productRecyclerView.setAdapter(productAdapter);
 
         // Nhận orderId từ Intent
-        String orderId = getIntent().getStringExtra("orderId");
+        orderId = getIntent().getStringExtra("orderId");
         if (orderId == null || orderId.isEmpty()) {
             Toast.makeText(this, "Không tìm thấy mã đơn hàng!", Toast.LENGTH_SHORT).show();
             finish();
@@ -81,7 +83,9 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Đã hoàn thành đơn hàng!", Toast.LENGTH_SHORT).show();
         });
 
-        backButton.setOnClickListener(v -> finish());
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     private void loadOrderDetails(String orderId) {
@@ -177,6 +181,9 @@ public class AdminOrderDetailActivity extends AppCompatActivity {
         }
 
         db.collection("orders").document(orderId).update(updates).addOnSuccessListener(aVoid -> {
+            Intent intent = new Intent();
+            intent.putExtra("id", orderId);
+            setResult(AdminOrderDetailActivity.RESULT_OK, intent);
             loadOrderDetails(orderId); // Load lại UI sau khi cập nhật
         }).addOnFailureListener(e -> {
             Toast.makeText(this, "Cập nhật trạng thái thất bại!", Toast.LENGTH_SHORT).show();
