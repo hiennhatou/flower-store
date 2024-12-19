@@ -134,6 +134,9 @@ public class AdminUserDetailActivity extends AppCompatActivity {
         userCollection.document(id).update(updatedData).addOnCompleteListener(task -> {
             Toast.makeText(this, task.isSuccessful() ? "Lưu thành công" : "Lỗi", Toast.LENGTH_LONG).show();
             progressingDialog.cancel();
+            Intent intent = new Intent();
+            intent.putExtra("id", id);
+            setResult(AdminUserDetailActivity.RESULT_OK, intent);
             finish();
         });
     }

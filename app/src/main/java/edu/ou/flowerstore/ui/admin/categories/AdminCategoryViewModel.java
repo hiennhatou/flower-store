@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.firestore.CollectionReference;
@@ -12,6 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
@@ -19,7 +23,9 @@ public class AdminCategoryViewModel extends ViewModel {
     private CollectionReference categoryCollection = new AppFirebase().getCategoriesCollection();
     private List<AdminCategoryAdapter.CategoryItem> categoryItems = new ArrayList<>();
     private AdminCategoryAdapter adapter = new AdminCategoryAdapter(categoryItems);
-    private Context context;
+    private AppCompatActivity context;
+
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     public AdminCategoryViewModel() {
         adapter.setOnDelete(categoryItem -> {
@@ -34,16 +40,46 @@ public class AdminCategoryViewModel extends ViewModel {
         });
 
         adapter.setOnClickView(categoryItem -> {
-            Intent intent = new Intent(context, AdminCategoryDetailActivity.class);
-            intent.putExtra("id", categoryItem.id);
-            context.startActivity(intent);
+            if (activityResultLauncher != null) {
+                Intent intent = new Intent(context, AdminCategoryDetailActivity.class);
+                intent.putExtra("id", categoryItem.id);
+                activityResultLauncher.launch(intent);
+            } else {
+                Intent intent = new Intent(context, AdminCategoryDetailActivity.class);
+                intent.putExtra("id", categoryItem.id);
+            }
         });
 
         loadData();
     }
 
-    public void setContext(Context context) {
+    public ActivityResultLauncher<Intent> getActivityResultLauncher() {
+        return activityResultLauncher;
+    }
+
+    public void setContext(AppCompatActivity context) {
         this.context = context;
+        activityResultLauncher = context.registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                o -> {
+                    if (o.getResultCode() == AdminCategoryDetailActivity.RESULT_OK) {
+                        String id = o.getData().getStringExtra("id");
+                        if (id != null)
+                            categoryCollection.document(id).get().addOnCompleteListener(v -> {
+                                if (v.isSuccessful()) {
+                                    DocumentSnapshot documentSnapshot = v.getResult();
+                                    AdminCategoryAdapter.CategoryItem categoryItem = new AdminCategoryAdapter.CategoryItem(documentSnapshot.getId(), documentSnapshot.getString("name"));
+                                    Optional<AdminCategoryAdapter.CategoryItem> matched = categoryItems.stream().filter(item -> item.id.equals(categoryItem.id)).findFirst();
+                                    if (matched.isPresent())
+                                        categoryItems.set(categoryItems.indexOf(matched.get()), categoryItem);
+                                    else
+                                        categoryItems.add(0, categoryItem);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                    }
+                }
+        );
     }
 
     private void loadData() {

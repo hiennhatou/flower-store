@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -35,6 +37,7 @@ public class ProfileMenuFragment extends Fragment {
     private View view;
     private Context context;
     private AlertDialog alertDialog;
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,9 @@ public class ProfileMenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile_menu, container, false);
+        activityResultLauncher =  registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == ModifyProfileActivity.RESULT_OK) initData();
+        });
         if (context != null) {
             initEvent();
             initData();
@@ -81,7 +87,7 @@ public class ProfileMenuFragment extends Fragment {
         alertDialog = dialogBuilder.create();
 
         profileBtn.setOnClickListener(v -> {
-            context.startActivity(new Intent(context, ModifyProfileActivity.class));
+            activityResultLauncher.launch(new Intent(context, ModifyProfileActivity.class));
         });
         orderBtn.setOnClickListener(v -> {
             context.startActivity(new Intent(context, CustomerOrdersActivity.class));

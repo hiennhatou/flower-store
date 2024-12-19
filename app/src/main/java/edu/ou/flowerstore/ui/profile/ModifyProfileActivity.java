@@ -88,6 +88,8 @@ public class ModifyProfileActivity extends AppCompatActivity {
             }
             appFirebase.getUsersCollection().document(user.getUid()).update(updatedData).addOnCompleteListener(task -> {
                 Toast.makeText(this, task.isSuccessful() ? "Lưu thành công" : "Lỗi", Toast.LENGTH_LONG).show();
+                if (task.isSuccessful())
+                    setResult(ModifyProfileActivity.RESULT_OK);
             });
         });
     }

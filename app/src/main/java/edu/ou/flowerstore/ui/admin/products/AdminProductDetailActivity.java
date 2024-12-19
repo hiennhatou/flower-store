@@ -199,6 +199,9 @@ public class AdminProductDetailActivity extends AppCompatActivity {
             progressingDialog.cancel();
             if (v.isSuccessful()) {
                 Toast.makeText(this, "Cập nhập sản phẩm thành công.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.putExtra("id", id != null ? id : ((DocumentReference) v.getResult()).getId());
+                setResult(AdminProductDetailActivity.RESULT_OK, intent);
                 finish();
             } else {
                 Toast.makeText(this, "Lỗi", Toast.LENGTH_LONG).show();
