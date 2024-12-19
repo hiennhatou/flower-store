@@ -41,6 +41,10 @@ public class AdminProductManagementViewModel extends ViewModel {
         loadData();
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private void loadData() {
         productCollection.orderBy("created_date", Query.Direction.DESCENDING).orderBy(FieldPath.documentId(), Query.Direction.ASCENDING).get().addOnCompleteListener(task -> {

@@ -23,6 +23,7 @@ import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
@@ -75,7 +76,9 @@ public class AdminCategoryDetailActivity extends AppCompatActivity {
                     binding.nameEdt.setText(doc.getString("name"));
                     Picasso.get().load(doc.getString("thumbnail")).into(binding.image);
                     binding.statusSwitch.setChecked(Boolean.TRUE.equals(doc.getBoolean("status")));
-                } else finish();
+                } else {
+                    finish();
+                }
             });
         }
     }
@@ -105,6 +108,9 @@ public class AdminCategoryDetailActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Lưu danh mục thành công", Toast.LENGTH_LONG).show();
                 progressingDialog.cancel();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("id", task.getResult() instanceof DocumentReference ? ((DocumentReference) task.getResult()).getId() : id);
+                setResult(AdminCategoryDetailActivity.RESULT_OK, resultIntent);
                 finish();
             }
         });
@@ -142,7 +148,9 @@ public class AdminCategoryDetailActivity extends AppCompatActivity {
 
     private void renderUI() {
         binding.title.setText(id != null ? "Chỉnh sửa danh mục" : "Thêm danh mục");
-        binding.backBtn.setOnClickListener(v -> finish());
+        binding.backBtn.setOnClickListener(v -> {
+            finish();
+        });
         binding.image.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             galleryResult.launch(intent);

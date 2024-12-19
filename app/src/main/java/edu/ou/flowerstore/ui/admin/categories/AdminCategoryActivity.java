@@ -38,7 +38,10 @@ public class AdminCategoryActivity extends AppCompatActivity {
         binding.categoriesList.setLayoutManager(new LinearLayoutManager(this));
         binding.categoriesList.setAdapter(viewModel.getAdapter());
         binding.addCategoryBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, AdminCategoryDetailActivity.class));
+            if (viewModel.getActivityResultLauncher() != null)
+                viewModel.getActivityResultLauncher().launch(new Intent(this, AdminCategoryDetailActivity.class));
+            else
+                startActivity(new Intent(this, AdminCategoryDetailActivity.class));
         });
     }
 }

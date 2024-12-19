@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import edu.ou.flowerstore.BuildConfig;
 import edu.ou.flowerstore.utils.MACGenerator;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -20,7 +21,7 @@ public class ZaloPayUtil {
 
     public static Call<ResponseCreateZalopayOrderBody> createPayment(String orderId, String uid, long totalPrice, String transId) {
         RequestCreateZalopayOrderBody data = new RequestCreateZalopayOrderBody();
-        data.setAppId(2554);
+        data.setAppId(Integer.parseInt(BuildConfig.ZALO_PAY_APP_ID));
         data.setAppUser(uid);
         data.setAppTransId(transId);
         data.setAppTime((new Date()).getTime());
@@ -28,15 +29,15 @@ public class ZaloPayUtil {
         data.setDescription(String.format("Thanh toán đơn hàng %s", orderId));
         data.setItem("[]");
         data.setEmbedData("{}");
-        data.setMac(MACGenerator.generateMAC(String.format(new Locale("vi", "vn"), "%d|%s|%s|%d|%d|%s|%s", data.getAppId(), data.getAppTransId(), data.getAppUser(), data.getAmount(), data.getAppTime(), data.getEmbedData(), data.getItem()), "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn"));
+        data.setMac(MACGenerator.generateMAC(String.format(new Locale("vi", "vn"), "%d|%s|%s|%d|%d|%s|%s", data.getAppId(), data.getAppTransId(), data.getAppUser(), data.getAmount(), data.getAppTime(), data.getEmbedData(), data.getItem()), BuildConfig.ZALO_PAY_KEY1));
         return api.createOrder(data);
     }
 
     public static Call<ResponseCreateZalopayOrderBody> queryTransStatus(String appTransId) {
         RequestQueryTransStatus data = new RequestQueryTransStatus();
-        data.setAppId(2554);
+        data.setAppId(Integer.parseInt(BuildConfig.ZALO_PAY_APP_ID));
         data.setAppTransId(appTransId);
-        data.setMac(MACGenerator.generateMAC(String.format(new Locale("vi", "vn"),"%d|%s|%s", data.getAppId(), data.getAppTransId(), "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn"), "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn"));
+        data.setMac(MACGenerator.generateMAC(String.format(new Locale("vi", "vn"),"%d|%s|%s", data.getAppId(), data.getAppTransId(), BuildConfig.ZALO_PAY_KEY1), BuildConfig.ZALO_PAY_KEY1));
         return api.queryTransStatus(data);
     }
 }

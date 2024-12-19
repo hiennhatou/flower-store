@@ -13,9 +13,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import edu.ou.flowerstore.FlowerStoreApplication;
-import edu.ou.flowerstore.MainActivity;
 import edu.ou.flowerstore.R;
 import edu.ou.flowerstore.databinding.ActivityPaymentResultBinding;
+import edu.ou.flowerstore.ui.main.MainActivity;
 import edu.ou.flowerstore.ui.orders.CustomerOrderDetailActivity;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
 import edu.ou.flowerstore.utils.zalopay.ResponseCreateZalopayOrderBody;

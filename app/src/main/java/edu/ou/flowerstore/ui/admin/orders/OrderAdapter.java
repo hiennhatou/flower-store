@@ -1,23 +1,37 @@
 package edu.ou.flowerstore.ui.admin.orders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+
 import edu.ou.flowerstore.R;
+import edu.ou.flowerstore.utils.firebase.AppFirebase;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
     private Context context;
     private final List<OrderOverview> orderList;
-    private final OnOrderClickListener onOrderClickListener;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
-    public OrderAdapter(List<OrderOverview> list, OnOrderClickListener listener) {
+    public OrderAdapter(List<OrderOverview> list) {
         orderList = list;
-        onOrderClickListener = listener;
     }
 
     @NonNull
@@ -38,7 +52,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.orderStatus.setText(String.format("Trạng thái: %s", order.status));
 
         // Thêm sự kiện nhấp
-        holder.itemView.setOnClickListener(v -> onOrderClickListener.onOrderClick(order.id));
+        holder.itemView.setOnClickListener(v -> {
+            if (context instanceof OnOrderClickListener) {
+                ((OnOrderClickListener) context).onOrderClick(order.id);
+            }
+        });
     }
 
     @Override

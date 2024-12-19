@@ -1,16 +1,13 @@
 package edu.ou.flowerstore;
 
 import android.app.Application;
-import android.content.Context;
-import android.os.StrictMode;
-import android.util.Log;
+import android.os.Build;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import com.cloudinary.android.MediaManager;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -25,9 +22,6 @@ import edu.ou.flowerstore.db.RoomDB;
 import edu.ou.flowerstore.db.entities.CartEntity;
 import edu.ou.flowerstore.ui.cart.CartItem;
 import edu.ou.flowerstore.utils.firebase.AppFirebase;
-import edu.ou.flowerstore.utils.zalopay.ZaloPayApi;
-//import retrofit2.Retrofit;
-//import retrofit2.converter.gson.GsonConverterFactory;
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPaySDK;
 
@@ -43,11 +37,11 @@ public class FlowerStoreApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ZaloPaySDK.init(2554, Environment.SANDBOX);
+        ZaloPaySDK.init(Integer.parseInt(BuildConfig.ZALO_PAY_APP_ID), Environment.SANDBOX);
         Map<String, Object> config = new HashMap();
-        config.put("cloud_name", "flower-store");
-        config.put("api_key", "284656339967919");
-        config.put("api_secret", "rsQdMHN8dsMpAoRYMbGGvIbMLyU");
+        config.put("cloud_name", BuildConfig.CLOUDINARY_NAME);
+        config.put("api_key", BuildConfig.CLOUDINARY_API_KEY);
+        config.put("api_secret", BuildConfig.CLOUDINARY_KEY_SECRET);
         config.put("secure", true);
         MediaManager.init(this, config);
         FlowerStoreApplication.instance = this;
